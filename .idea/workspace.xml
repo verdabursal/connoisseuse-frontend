@@ -2,11 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="7fc8ee59-d90a-430c-99da-909df8823a12" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/src/components/Add.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Add.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/Favorites.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Favorites.jsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/Home.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Home.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/MyCollection.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/MyCollection.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/Settings.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Settings.jsx" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -28,11 +24,11 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/components/Home.jsx">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="180">
-              <caret line="12" column="20" lean-forward="true" selection-start-line="2" selection-end-line="12" selection-end-column="20" />
+            <state relative-caret-position="105">
+              <caret line="7" column="63" lean-forward="true" selection-start-line="7" selection-start-column="63" selection-end-line="7" selection-end-column="63" />
             </state>
           </provider>
         </entry>
@@ -64,11 +60,11 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/components/Settings.jsx">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="180">
-              <caret line="12" column="24" lean-forward="true" selection-start-line="12" selection-start-column="24" selection-end-line="12" selection-end-column="24" />
+            <state relative-caret-position="90">
+              <caret line="6" lean-forward="true" selection-start-line="6" selection-end-line="6" />
             </state>
           </provider>
         </entry>
@@ -82,11 +78,11 @@
     <option name="CHANGED_PATHS">
       <list>
         <option value="$PROJECT_DIR$/src/App.js" />
-        <option value="$PROJECT_DIR$/src/components/Home.jsx" />
         <option value="$PROJECT_DIR$/src/components/MyCollection.jsx" />
         <option value="$PROJECT_DIR$/src/components/Favorites.jsx" />
         <option value="$PROJECT_DIR$/src/components/Add.jsx" />
         <option value="$PROJECT_DIR$/src/components/Settings.jsx" />
+        <option value="$PROJECT_DIR$/src/components/Home.jsx" />
       </list>
     </option>
   </component>
@@ -127,7 +123,7 @@
   <component name="PropertiesComponent">
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1559231030296" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1559231198671" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.path.for.package.eslint" value="project" />
@@ -159,12 +155,12 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1559162203278</updated>
-      <workItem from="1559162204598" duration="1794000" />
+      <workItem from="1559162204598" duration="1951000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="1794000" />
+    <option name="totallyTimeSpent" value="1951000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="21" y="23" width="1395" height="824" extended-state="0" />
@@ -232,13 +228,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/components/Home.jsx">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="180">
-          <caret line="12" column="20" lean-forward="true" selection-start-line="2" selection-end-line="12" selection-end-column="20" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/components/MyCollection.jsx">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="180">
@@ -262,8 +251,15 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/components/Settings.jsx">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="180">
-          <caret line="12" column="24" lean-forward="true" selection-start-line="12" selection-start-column="24" selection-end-line="12" selection-end-column="24" />
+        <state relative-caret-position="90">
+          <caret line="6" lean-forward="true" selection-start-line="6" selection-end-line="6" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/components/Home.jsx">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="105">
+          <caret line="7" column="63" lean-forward="true" selection-start-line="7" selection-start-column="63" selection-end-line="7" selection-end-column="63" />
         </state>
       </provider>
     </entry>
