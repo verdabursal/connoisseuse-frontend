@@ -67,27 +67,27 @@ class Add extends React.Component {
 
                 <div className="form-group">
                     <label htmlFor="inputType">Type</label>
-                    <input type="text" className="form-control" id="inputType" placeholder="Merlot"/>
+                    <input type="text" className="form-control" id="inputType" placeholder="e.g. Merlot"/>
                 </div>
 
                 <div className="form-group">
                     <label htmlFor="inputYear">Year</label>
-                    <input type="number" className="form-control" id="inputYear" placeholder="2017"/>
+                    <input type="number" className="form-control" id="inputYear" placeholder="e.g. 2017"/>
                 </div>
 
                 <div className="form-group">
                     <label htmlFor="inputRegion">Region</label>
-                    <input type="text" className="form-control" id="inputRegion" placeholder="France"/>
+                    <input type="text" className="form-control" id="inputRegion" placeholder="e.g. France"/>
                 </div>
 
                 <div className="form-group">
                     <label htmlFor="inputLabel">Label</label>
-                    <input type="text" className="form-control" id="inputLabel" placeholder="Cotes du Rhone"/>
+                    <input type="text" className="form-control" id="inputLabel" placeholder="e.g. Cotes du Rhone"/>
                 </div>
 
                 <div className="form-group">
                     <label htmlFor="inputDescription">Description</label>
-                    <textarea className="form-control" id="inputDescription"/>
+                    <textarea className="form-control" id="inputDescription" placeholder="e.g. oaky, buttery, smooth"/>
                 </div>
 
             </div>
