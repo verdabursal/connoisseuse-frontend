@@ -4,18 +4,66 @@ class Add extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            category: ""
+            category: "red"
         };
     }
+
+    handleChange = async event => {
+        await this.setState({ category: event.target.value });
+    };
 
     render() {
         return(
             <div>
-                <button type="button" className="btn btn-outline-dark">Red</button>
-                <button type="button" className="btn btn-outline-dark">White</button>
-                <button type="button" className="btn btn-outline-dark">Pink</button>
-                <button type="button" className="btn btn-outline-dark">Bubbly</button>
-                <button type="button" className="btn btn-outline-dark">Sweet</button>
+                <form>
+                <div className="btn-group btn-group-toggle" data-toggle="buttons">
+                    <label className={
+                        this.state.category === "red"
+                            ? "btn btn-secondary active"
+                            : "btn btn-secondary"}>
+                        <input type="radio" name="options" id="option1" value="red" autoComplete="off"
+                               onChange={event => {this.handleChange(event)}}
+                               checked={this.state.category === "red"}/>
+                        Red
+                    </label>
+                    <label className={
+                        this.state.category === "white"
+                            ? "btn btn-secondary active"
+                            : "btn btn-secondary"}>
+                        <input type="radio" name="options" id="option2" value="white" autoComplete="off"
+                               onChange={event => {this.handleChange(event)}}
+                               checked={this.state.category === "white"}/>
+                        White
+                    </label>
+                    <label className={
+                        this.state.category === "pink"
+                            ? "btn btn-secondary active"
+                            : "btn btn-secondary"}>
+                        <input type="radio" name="options" id="option3" value="pink" autoComplete="off"
+                               onChange={event => {this.handleChange(event)}}
+                               checked={this.state.category === "pink"}/>
+                        Pink
+                    </label>
+                    <label className={
+                        this.state.category === "bubbly"
+                            ? "btn btn-secondary active"
+                            : "btn btn-secondary"}>
+                        <input type="radio" name="options" id="option4" value="bubbly" autoComplete="off"
+                               onChange={event => {this.handleChange(event)}}
+                               checked={this.state.category === "bubbly"}/>
+                        Bubbly
+                    </label>
+                    <label className={
+                        this.state.category === "sweet"
+                            ? "btn btn-secondary active"
+                            : "btn btn-secondary"}>
+                        <input type="radio" name="options" id="option5" value="sweet" autoComplete="off"
+                               onChange={event => {this.handleChange(event)}}
+                               checked={this.state.category === "sweet"}/>
+                        Sweet
+                    </label>
+                </div>
+                </form>
 
                 <div className="form-group">
                     <label htmlFor="inputType">Type</label>
