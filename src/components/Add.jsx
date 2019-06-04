@@ -14,7 +14,51 @@ class Add extends React.Component {
 
     render() {
         return(
-            <div>
+            <div className="container-fluid">
+                <div className="card-deck">
+                    <div className="card bg-light mb-3">
+                        <img src="https://picsum.photos/100/50" className="card-img-top"
+                            alt="red wine glass"/>
+                        <div className="card-body">
+                            <h5 className="card-title">Red</h5>
+                            <p className="card-text">e.g. Merlot, Pinot Noir</p>
+                        </div>
+                    </div>
+                    <div className="card bg-light mb-3">
+                        <img src="https://picsum.photos/100/50" className="card-img-top"
+                             alt="white wine glass"/>
+                        <div className="card-body">
+                            <h5 className="card-title">White</h5>
+                            <p className="card-text">e.g. Chardonnay, Pinot Gris</p>
+                        </div>
+                    </div>
+                    <div className="card bg-light mb-3">
+                        <img src="https://picsum.photos/100/50" className="card-img-top"
+                             alt="pink wine glass"/>
+                        <div className="card-body">
+                            <h5 className="card-title">Pink</h5>
+                            <p className="card-text">e.g. Rose, White Zinfandel</p>
+                        </div>
+                    </div>
+                    <div className="card bg-light mb-3">
+                        <img src="https://picsum.photos/100/50" className="card-img-top"
+                             alt="bubbly wine glass"/>
+                        <div className="card-body">
+                            <h5 className="card-title">Bubbly</h5>
+                            <p className="card-text">e.g. Champagne, Sparkling Red</p>
+                        </div>
+                    </div>
+                    <div className="card bg-light mb-3">
+                        <img src="https://picsum.photos/100/50" className="card-img-top"
+                             alt="sweet wine glass"/>
+                        <div className="card-body">
+                            <h5 className="card-title">Sweet</h5>
+                            <p className="card-text">e.g. Port, Ice Wine</p>
+                        </div>
+                    </div>
+                </div>
+
+
                 <form>
                 <div className="btn-group btn-group-toggle" data-toggle="buttons">
                     <label className={
