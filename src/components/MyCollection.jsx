@@ -18,6 +18,10 @@ class MyCollection extends React.Component {
         this.setState({ bottles: mockData })
     }
 
+    toggleFavorite = async id => {
+        // send request to DB to toggle favorite status of bottle with given id
+    };
+
     render() {
         return(
             <div>
@@ -38,8 +42,9 @@ class MyCollection extends React.Component {
                         this.state.bottles.map(
                             bottle =>
                                 <tr key={bottle.id}>
-                                    <td>{bottle.favorite
-                                    ? <i className="fa fa-star"/>
+                                    <td onClick={this.toggleFavorite(bottle.id)}>
+                                        {bottle.favorite
+                                        ? <i className="fa fa-star"/>
                                         : <FontAwesomeIcon icon={ faStar }/>}</td>
                                     <td>{bottle.id}</td>
                                     <td>{bottle.category}</td>
