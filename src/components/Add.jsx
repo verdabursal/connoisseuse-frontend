@@ -8,15 +8,18 @@ class Add extends React.Component {
         };
     }
 
-    handleChange = async event => {
-        await this.setState({ category: event.target.value });
+    setCategory = async category => {
+        await this.setState({ category: category });
     };
 
     render() {
         return(
             <div className="container-fluid">
                 <div className="card-deck">
-                    <div className="card bg-light mb-3">
+                    <div className={this.state.category === "red"
+                        ? "card border-dark bg-light mb-3"
+                        : "card border-light bg-light mb-3"}
+                        onClick={() => {this.setCategory("red")}}>
                         <img src="https://picsum.photos/100/50" className="card-img-top"
                             alt="red wine glass"/>
                         <div className="card-body">
@@ -24,7 +27,10 @@ class Add extends React.Component {
                             <p className="card-text">e.g. Merlot, Pinot Noir</p>
                         </div>
                     </div>
-                    <div className="card bg-light mb-3">
+                    <div className={this.state.category === "white"
+                        ? "card border-dark bg-light mb-3"
+                        : "card border-light bg-light mb-3"}
+                        onClick={() => {this.setCategory("white")}}>
                         <img src="https://picsum.photos/100/50" className="card-img-top"
                              alt="white wine glass"/>
                         <div className="card-body">
@@ -32,7 +38,10 @@ class Add extends React.Component {
                             <p className="card-text">e.g. Chardonnay, Pinot Gris</p>
                         </div>
                     </div>
-                    <div className="card bg-light mb-3">
+                    <div className={this.state.category === "pink"
+                        ? "card border-dark bg-light mb-3"
+                        : "card border-light bg-light mb-3"}
+                         onClick={() => {this.setCategory("pink")}}>
                         <img src="https://picsum.photos/100/50" className="card-img-top"
                              alt="pink wine glass"/>
                         <div className="card-body">
@@ -40,7 +49,10 @@ class Add extends React.Component {
                             <p className="card-text">e.g. Rose, White Zinfandel</p>
                         </div>
                     </div>
-                    <div className="card bg-light mb-3">
+                    <div className={this.state.category === "bubbly"
+                        ? "card border-dark bg-light mb-3"
+                        : "card border-light bg-light mb-3"}
+                         onClick={() => {this.setCategory("bubbly")}}>
                         <img src="https://picsum.photos/100/50" className="card-img-top"
                              alt="bubbly wine glass"/>
                         <div className="card-body">
@@ -48,7 +60,10 @@ class Add extends React.Component {
                             <p className="card-text">e.g. Champagne, Sparkling Red</p>
                         </div>
                     </div>
-                    <div className="card bg-light mb-3">
+                    <div className={this.state.category === "sweet"
+                        ? "card border-dark bg-light mb-3"
+                        : "card border-light bg-light mb-3"}
+                         onClick={() => {this.setCategory("sweet")}}>
                         <img src="https://picsum.photos/100/50" className="card-img-top"
                              alt="sweet wine glass"/>
                         <div className="card-body">
@@ -57,57 +72,6 @@ class Add extends React.Component {
                         </div>
                     </div>
                 </div>
-
-
-                <form>
-                <div className="btn-group btn-group-toggle" data-toggle="buttons">
-                    <label className={
-                        this.state.category === "red"
-                            ? "btn btn-secondary active"
-                            : "btn btn-secondary"}>
-                        <input type="radio" name="options" id="option1" value="red" autoComplete="off"
-                               onChange={event => {this.handleChange(event)}}
-                               checked={this.state.category === "red"}/>
-                        Red
-                    </label>
-                    <label className={
-                        this.state.category === "white"
-                            ? "btn btn-secondary active"
-                            : "btn btn-secondary"}>
-                        <input type="radio" name="options" id="option2" value="white" autoComplete="off"
-                               onChange={event => {this.handleChange(event)}}
-                               checked={this.state.category === "white"}/>
-                        White
-                    </label>
-                    <label className={
-                        this.state.category === "pink"
-                            ? "btn btn-secondary active"
-                            : "btn btn-secondary"}>
-                        <input type="radio" name="options" id="option3" value="pink" autoComplete="off"
-                               onChange={event => {this.handleChange(event)}}
-                               checked={this.state.category === "pink"}/>
-                        Pink
-                    </label>
-                    <label className={
-                        this.state.category === "bubbly"
-                            ? "btn btn-secondary active"
-                            : "btn btn-secondary"}>
-                        <input type="radio" name="options" id="option4" value="bubbly" autoComplete="off"
-                               onChange={event => {this.handleChange(event)}}
-                               checked={this.state.category === "bubbly"}/>
-                        Bubbly
-                    </label>
-                    <label className={
-                        this.state.category === "sweet"
-                            ? "btn btn-secondary active"
-                            : "btn btn-secondary"}>
-                        <input type="radio" name="options" id="option5" value="sweet" autoComplete="off"
-                               onChange={event => {this.handleChange(event)}}
-                               checked={this.state.category === "sweet"}/>
-                        Sweet
-                    </label>
-                </div>
-                </form>
 
                 <div className="form-group">
                     <label htmlFor="inputType">Type</label>
