@@ -6,7 +6,8 @@
     "year": 2017,
     "region": "France",
     "label": "Cotes du Rhone",
-    "description": "oaky"
+    "description": "oaky",
+    "favorite": true
   },
   {
     "id": 2,
@@ -15,7 +16,8 @@
     "year": 2003,
     "region": "France",
     "label": "Le Chardonnier",
-    "description": "buttery"
+    "description": "buttery",
+    "favorite": false
   },
   {
     "id": 3,
@@ -24,7 +26,8 @@
     "year": 2018,
     "region": "California",
     "label": "Charles Shaw",
-    "description": "zesty"
+    "description": "zesty",
+    "favorite": false
   },
   {
     "id": 4,
@@ -33,7 +36,8 @@
     "year": 2015,
     "region": "Italy",
     "label": "Presto Prosecco",
-    "description": ""
+    "description": "",
+    "favorite": false
   },
   {
     "id": 5,
@@ -42,6 +46,7 @@
     "year": 2005,
     "region": "Portugal",
     "label": "Il Porto",
-    "description": "smooth"
+    "description": "smooth",
+    "favorite": true
   }
 ]

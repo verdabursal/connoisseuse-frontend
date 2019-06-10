@@ -10,6 +10,7 @@ class MyCollection extends React.Component {
                 <table className="table">
                     <tbody>
                     <tr>
+                        <th>{"Favorite"}</th>
                         <th>{"ID"}</th>
                         <th>{"Category"}</th>
                         <th>{"Type"}</th>
@@ -22,6 +23,7 @@ class MyCollection extends React.Component {
                         mockData.map(
                             bottle =>
                                 <tr key={bottle.id}>
+                                    <td>{bottle.favorite}</td>
                                     <td>{bottle.id}</td>
                                     <td>{bottle.category}</td>
                                     <td>{bottle.type}</td>
