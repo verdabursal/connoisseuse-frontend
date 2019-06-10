@@ -1,0 +1,90 @@
+[
+  {
+    "variety": "Merlot",
+    "category": "red"
+  },
+  {
+    "variety": "Pinot Noir",
+    "category": "red"
+  },
+  {
+    "variety": "Pinot Gris/Pinot Grigio",
+    "category": "white"
+  },
+  {
+    "variety": "Pinot Blanc",
+    "category": "white"
+  },
+  {
+    "variety": "Champagne",
+    "category": "bubbly"
+  },
+  {
+    "variety": "Chardonnay",
+    "category": "white"
+  },
+  {
+    "variety": "Prosecco",
+    "category": "bubbly"
+  },
+  {
+    "variety": "Shiraz",
+    "category": "red"
+  },
+  {
+    "variety": "Rose",
+    "category": "pink"
+  },
+  {
+    "variety": "White Zinfandel",
+    "category": "pink"
+  },
+  {
+    "variety": "Sparkling Red",
+    "category": "bubbly"
+  },
+  {
+    "variety": "Sparkling White",
+    "category": "bubbly"
+  },
+  {
+    "variety": "Sparkling Pink",
+    "category": "bubbly"
+  },
+  {
+    "variety": "Tawny Port",
+    "category": "sweet"
+  },
+  {
+    "variety": "Dessert Wine",
+    "category": "sweet"
+  },
+  {
+    "variety": "Ruby Port",
+    "category": "sweet"
+  },
+  {
+    "variety": "Malbec",
+    "category": "red"
+  },
+  {
+    "variety": "Chenin Blanc",
+    "category": "white"
+  },
+  {
+    "variety": "Red Blend",
+    "category": "red"
+  },
+  {
+    "variety": "White Blend",
+    "category": "white"
+  },
+  {
+    "variety": "Pink Blend",
+    "category": "pink"
+  },
+  {
+    "variety": "Ice Wine",
+    "category": "sweet"
+  }
+]
