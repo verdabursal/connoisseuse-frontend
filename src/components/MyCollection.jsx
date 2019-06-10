@@ -1,8 +1,23 @@
 import React from 'react';
 
+import { faStar } from "@fortawesome/free-regular-svg-icons";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+
 import mockData from '../mock-data/collection.mock';
 
 class MyCollection extends React.Component {
+
+    constructor(props) {
+        super(props);
+        this.state = {
+            bottles: []
+        }
+    }
+
+    async componentDidMount() {
+        this.setState({ bottles: mockData })
+    }
+
     render() {
         return(
             <div>
@@ -20,10 +35,12 @@ class MyCollection extends React.Component {
                         <th>{"Description"}</th>
                     </tr>
                     {
-                        mockData.map(
+                        this.state.bottles.map(
                             bottle =>
                                 <tr key={bottle.id}>
-                                    <td>{bottle.favorite}</td>
+                                    <td>{bottle.favorite
+                                    ? <i className="fa fa-star"/>
+                                        : <FontAwesomeIcon icon={ faStar }/>}</td>
                                     <td>{bottle.id}</td>
                                     <td>{bottle.category}</td>
                                     <td>{bottle.type}</td>
