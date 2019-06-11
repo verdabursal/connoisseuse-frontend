@@ -6,6 +6,7 @@ import Home from "../components/Home";
 import MyCollection from "../components/MyCollection";
 import Add from "../components/Add";
 import Settings from "../components/Settings";
+import EditBottle from "../components/EditBottle";
 
 class MenuBar extends React.Component {
     constructor(props) {
@@ -41,6 +42,10 @@ class MenuBar extends React.Component {
                             path="/settings"
                             exact
                             component={Settings}/>
+                        <Route
+                            path="/my-collection/edit/:id"
+                            exact
+                            component={EditBottle}/>
                     </div>
                 </div>
                 </div>

@@ -58,6 +58,19 @@ class MyCollection extends React.Component {
                                     <td>{bottle.region}</td>
                                     <td>{bottle.label}</td>
                                     <td>{bottle.description}</td>
+                                    <td>
+                                        <button className="btn"
+                                                onClick={async () => {
+                                                    this.props.history.push({
+                                                        pathname: `/my-collection/edit/${bottle.id}`,
+                                                        state: {
+                                                            id: bottle.id
+                                                        }
+                                                    })
+                                                }}>
+                                            <span><i className="fa fa-pencil"/></span>
+                                        </button>
+                                    </td>
                                 </tr>
                         )
                     }
