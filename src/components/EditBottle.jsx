@@ -1,7 +1,5 @@
 import React from 'react';
 
-import { Link } from "react-router-dom";
-
 import mockData from '../mock-data/collection.mock';
 import mockVarieties from '../mock-data/varieties.mock';
 
@@ -70,11 +68,12 @@ class EditBottle extends React.Component {
     render() {
         return (
             <div>
-
                 <button className="btn btn-outline-dark">
                     <i className="fa fa-arrow-left"/>
-                    <span> Back</span>
-                </button><br/><br/>
+                    <span> Return to My Collection</span>
+                </button>
+
+                <br/><br/>
 
                 <label>Bottle {this.state.bottle.id}</label><br/>
 
@@ -125,19 +124,27 @@ class EditBottle extends React.Component {
                               placeholder="e.g. oaky, buttery, smooth"/>
                 </div>
 
+                <button className="btn btn-danger">
+                    <span>Delete this bottle</span>
+                </button>
+
+                <br/><br/>
+
                 <button className="btn btn-secondary">
                     <i className="fa fa-undo"/>
                     <span> Cancel</span>
                 </button>&nbsp;
 
-                <button className="btn btn-danger">
-                    <span>Delete </span>
-                    <i className="fa fa-times"/>
-                </button>&nbsp;
-
                 <button className="btn btn-primary">
                     <span>Save </span>
                     <i className="fa fa-check"/>
+                </button>
+
+                <br/><br/>
+
+                <button className="btn btn-outline-dark">
+                    <i className="fa fa-arrow-left"/>
+                    <span> Return to My Collection</span>
                 </button>
 
             </div>
