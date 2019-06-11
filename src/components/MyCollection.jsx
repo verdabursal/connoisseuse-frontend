@@ -4,6 +4,9 @@ import { faStar } from "@fortawesome/free-regular-svg-icons";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 import mockData from '../mock-data/collection.mock';
+import mockVarieties from '../mock-data/varieties.mock';
+
+import _ from "lodash";
 
 class MyCollection extends React.Component {
 
@@ -32,7 +35,7 @@ class MyCollection extends React.Component {
                         <th>{"Favorite"}</th>
                         <th>{"ID"}</th>
                         <th>{"Category"}</th>
-                        <th>{"Type"}</th>
+                        <th>{"Variety"}</th>
                         <th>{"Year"}</th>
                         <th>{"Region"}</th>
                         <th>{"Label"}</th>
@@ -47,8 +50,10 @@ class MyCollection extends React.Component {
                                         ? <i className="fa fa-star"/>
                                         : <FontAwesomeIcon icon={ faStar }/>}</td>
                                     <td>{bottle.id}</td>
-                                    <td>{bottle.category}</td>
-                                    <td>{bottle.type}</td>
+                                    <td>{
+                                        _.find(mockVarieties, ['variety', bottle.variety]).category
+                                    }</td>
+                                    <td>{bottle.variety}</td>
                                     <td>{bottle.year}</td>
                                     <td>{bottle.region}</td>
                                     <td>{bottle.label}</td>

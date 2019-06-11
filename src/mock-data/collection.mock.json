@@ -1,8 +1,7 @@
 [
   {
     "id": 1,
-    "category": "red",
-    "type": "Merlot",
+    "variety": "Merlot",
     "year": 2017,
     "region": "France",
     "label": "Cotes du Rhone",
@@ -11,8 +10,7 @@
   },
   {
     "id": 2,
-    "category": "white",
-    "type": "Chardonnay",
+    "variety": "Chardonnay",
     "year": 2003,
     "region": "France",
     "label": "Le Chardonnier",
@@ -21,8 +19,7 @@
   },
   {
     "id": 3,
-    "category": "pink",
-    "type": "White Zinfandel",
+    "variety": "White Zinfandel",
     "year": 2018,
     "region": "California",
     "label": "Charles Shaw",
@@ -31,8 +28,7 @@
   },
   {
     "id": 4,
-    "category": "bubbly",
-    "type": "Prosecco",
+    "variety": "Prosecco",
     "year": 2015,
     "region": "Italy",
     "label": "Presto Prosecco",
@@ -41,8 +37,7 @@
   },
   {
     "id": 5,
-    "category": "sweet",
-    "type": "Tawny Port",
+    "variety": "Tawny Port",
     "year": 2005,
     "region": "Portugal",
     "label": "Il Porto",

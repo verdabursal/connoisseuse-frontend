@@ -1,15 +1,53 @@
 import React from 'react';
 
+import mockVarieties from '../mock-data/varieties.mock';
+import _ from "lodash";
+
 class Add extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            category: "red"
+            category: "red",
+            redVarieties: [],
+            whiteVarieties: [],
+            pinkVarieties: [],
+            bubblyVarieties: [],
+            sweetVarieties: [],
+            selectedVarieties: [],
+            variety: ""
         };
     }
 
+    async componentDidMount() {
+        let redVarieties = _.filter(mockVarieties, ['category', "red"]);
+        let whiteVarieties = _.filter(mockVarieties, ['category', "white"]);
+        let pinkVarieties = _.filter(mockVarieties, ['category', "pink"]);
+        let bubblyVarieties = _.filter(mockVarieties, ['category', "bubbly"]);
+        let sweetVarieties = _.filter(mockVarieties, ['category', "sweet"]);
+        let selectedVarieties = redVarieties;
+        this.setState({
+            redVarieties, whiteVarieties, pinkVarieties, bubblyVarieties, sweetVarieties, selectedVarieties
+        })
+    }
+
     setCategory = async category => {
-        await this.setState({ category: category });
+        let selectedVarieties = [];
+        if (category === "red") {
+            selectedVarieties = this.state.redVarieties;
+        } else if (category === "white") {
+            selectedVarieties = this.state.whiteVarieties;
+        } else if (category === "pink") {
+            selectedVarieties = this.state.pinkVarieties;
+        } else if (category === "bubbly") {
+            selectedVarieties = this.state.bubblyVarieties;
+        } else if (category === "sweet") {
+            selectedVarieties = this.state.sweetVarieties;
+        }
+        await this.setState({ category, selectedVarieties })
+    };
+
+    setVariety = async variety => {
+        this.setState({ variety })
     };
 
     render() {
@@ -75,7 +113,12 @@ class Add extends React.Component {
 
                 <div className="form-group">
                     <label htmlFor="inputType">Type</label>
-                    <input type="text" className="form-control" id="inputType" placeholder="e.g. Merlot"/>
+                    <select className="form-control">
+                        {this.state.selectedVarieties.map(
+                        variety =>
+                            <option onClick={() => this.setVariety(variety.variety)}>{variety.variety}</option>
+                        )}
+                    </select>
                 </div>
 
                 <div className="form-group">
