@@ -13,7 +13,6 @@ class EditBottle extends React.Component {
         this.state = {
             bottle: {
                 id: props.location.state.id,
-                category: '',
                 variety: '',
                 year: 0,
                 region: '',
@@ -21,49 +20,48 @@ class EditBottle extends React.Component {
                 description: '',
                 favorite: false
             },
-            redVarieties: [],
-            whiteVarieties: [],
-            pinkVarieties: [],
-            bubblyVarieties: [],
-            sweetVarieties: [],
-            selectedVarieties: []
+            category: 'red',
+            varieties: {
+                red: [],
+                white: [],
+                pink: [],
+                bubbly: [],
+                sweet: []
+            }
         }
     }
 
     async componentDidMount() {
-        let bottle = _.find(mockData, ['id', this.state.bottle.id]);
-        let variety = _.find(mockVarieties, ['variety', bottle.variety]);
-        bottle = _.assign({}, bottle, { category: variety.category });
-        this.setState({ bottle });
+        let bottle = await _.find(mockData, ['id', this.state.bottle.id]);
+        let variety = await _.find(mockVarieties, ['variety', bottle.variety]);
+        let category = variety.category;
 
-        let redVarieties = _.filter(mockVarieties, ['category', "red"]);
-        let whiteVarieties = _.filter(mockVarieties, ['category', "white"]);
-        let pinkVarieties = _.filter(mockVarieties, ['category', "pink"]);
-        let bubblyVarieties = _.filter(mockVarieties, ['category', "bubbly"]);
-        let sweetVarieties = _.filter(mockVarieties, ['category', "sweet"]);
-        let selectedVarieties = [];
-        switch (variety.category) {
-            case "red":
-                selectedVarieties = redVarieties;
-                break;
-            case "white":
-                selectedVarieties = whiteVarieties;
-                break;
-            case "pink":
-                selectedVarieties = pinkVarieties;
-                break;
-            case "bubbly":
-                selectedVarieties = bubblyVarieties;
-                break;
-            case "sweet":
-                selectedVarieties = sweetVarieties;
-                break;
-        }
+        let red = await _.filter(mockVarieties, ['category', "red"]);
+        let white = await _.filter(mockVarieties, ['category', "white"]);
+        let pink = await _.filter(mockVarieties, ['category', "pink"]);
+        let bubbly = await _.filter(mockVarieties, ['category', "bubbly"]);
+        let sweet = await _.filter(mockVarieties, ['category', "sweet"]);
+        let varieties = {red, white, pink, bubbly, sweet};
 
-        this.setState({
-            redVarieties, whiteVarieties, pinkVarieties, bubblyVarieties, sweetVarieties, selectedVarieties
-        });
+        this.setState({bottle, category, varieties});
     }
+
+    toggleFavorite = () => {
+        this.updateForm('favorite', !this.state.bottle.favorite);
+    };
+
+    handleCategoryChange = async event => {
+        let category = event.target.value;
+        this.setState({ category });
+        this.updateForm('variety', this.state.varieties[category]);
+    };
+
+    updateForm = async (field, value) => {
+        let updates = {};
+        updates[field] = value;
+        let bottle = _.assign({}, this.state.bottle, updates);
+        this.setState({ bottle });
+    };
 
     render() {
         return (
@@ -77,13 +75,15 @@ class EditBottle extends React.Component {
 
                 <label>Bottle {this.state.bottle.id}</label><br/>
 
-                <label>Favorite {this.state.bottle.favorite
+                <label onClick={this.toggleFavorite}>Favorite
+                    {this.state.bottle.favorite
                     ? <i className="fa fa-star"/>
-                    : <FontAwesomeIcon icon={ faStar }/>}</label><br/>
+                    : <FontAwesomeIcon icon={faStar}/>}</label><br/>
 
                 <div className="form-group">
                     <label htmlFor="editCategory">Category</label>
-                    <select className="form-control" id="editCategory" value={this.state.bottle.category}>
+                    <select className="form-control" id="editCategory" value={this.state.category}
+                            onChange={(event) => this.handleCategoryChange(event)}>
                         <option value="red">red</option>
                         <option value="white">white</option>
                         <option value="pink">pink</option>
@@ -94,8 +94,9 @@ class EditBottle extends React.Component {
 
                 <div className="form-group">
                     <label htmlFor="editVariety">Variety</label>
-                    <select className="form-control" id="editVariety" value={this.state.bottle.variety}>
-                        {this.state.selectedVarieties.map(
+                    <select className="form-control" id="editVariety" value={this.state.bottle.variety}
+                            onChange={(event) => this.updateForm('variety', event.target.value)}>
+                        {this.state.varieties[this.state.category].map(
                             variety => (
                                 <option value={variety.variety}>{variety.variety}</option>
                             )
@@ -105,23 +106,27 @@ class EditBottle extends React.Component {
 
                 <div className="form-group">
                     <label htmlFor="editYear">Year</label>
-                    <input type="number" className="form-control" id="editYear" value={this.state.bottle.year}/>
+                    <input type="number" className="form-control" id="editYear" value={this.state.bottle.year}
+                           onChange={(event) => this.updateForm('year', event.target.value)}/>
                 </div>
 
                 <div className="form-group">
                     <label htmlFor="editRegion">Region</label>
-                    <input type="text" className="form-control" id="editRegion" value={this.state.bottle.region}/>
+                    <input type="text" className="form-control" id="editRegion" value={this.state.bottle.region}
+                           onChange={(event) => this.updateForm('region', event.target.value)}/>
                 </div>
 
                 <div className="form-group">
                     <label htmlFor="editLabel">Label</label>
-                    <input type="text" className="form-control" id="editLabel" value={this.state.bottle.label}/>
+                    <input type="text" className="form-control" id="editLabel" value={this.state.bottle.label}
+                           onChange={(event) => this.updateForm('label', event.target.value)}/>
                 </div>
 
                 <div className="form-group">
                     <label htmlFor="editDescription">Description</label>
                     <textarea className="form-control" id="editDescription" value={this.state.bottle.description}
-                              placeholder="e.g. oaky, buttery, smooth"/>
+                              placeholder="e.g. oaky, buttery, smooth"
+                              onChange={(event) => this.updateForm('description', event.target.value)}/>
                 </div>
 
                 <button className="btn btn-danger">
@@ -133,7 +138,8 @@ class EditBottle extends React.Component {
                 <button className="btn btn-secondary">
                     <i className="fa fa-undo"/>
                     <span> Cancel</span>
-                </button>&nbsp;
+                </button>
+                &nbsp;
 
                 <button className="btn btn-primary">
                     <span>Save </span>
