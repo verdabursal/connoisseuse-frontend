@@ -46,7 +46,7 @@ class EditBottle extends React.Component {
         this.setState({bottle, category, varieties});
     }
 
-    toggleFavorite = () => {
+    toggleFavorite = async () => {
         this.updateForm('favorite', !this.state.bottle.favorite);
     };
 
@@ -63,10 +63,29 @@ class EditBottle extends React.Component {
         this.setState({ bottle });
     };
 
+    deleteBottle = async () => {
+        // send request to DB
+    };
+
+    // reload this page with information from database
+    cancelChanges = async () => {
+        this.componentDidMount();
+    };
+
+    // save changes to database but don't reload page
+    saveChanges = async () => {
+        // send request to DB
+    };
+
+    // return to My Collection without saving any unsaved changes
+    goBackToCollection = async () => {
+        this.props.history.push('/my-collection');
+    };
+
     render() {
         return (
             <div>
-                <button className="btn btn-outline-dark">
+                <button className="btn btn-outline-dark" onClick={this.goBackToCollection}>
                     <i className="fa fa-arrow-left"/>
                     <span> Return to My Collection</span>
                 </button>
@@ -129,26 +148,26 @@ class EditBottle extends React.Component {
                               onChange={(event) => this.updateForm('description', event.target.value)}/>
                 </div>
 
-                <button className="btn btn-danger">
+                <button className="btn btn-danger" onClick={this.deleteBottle}>
                     <span>Delete this bottle</span>
                 </button>
 
                 <br/><br/>
 
-                <button className="btn btn-secondary">
+                <button className="btn btn-secondary" onClick={this.cancelChanges}>
                     <i className="fa fa-undo"/>
                     <span> Cancel</span>
                 </button>
                 &nbsp;
 
-                <button className="btn btn-primary">
+                <button className="btn btn-primary" onClick={this.saveChanges}>
                     <span>Save </span>
                     <i className="fa fa-check"/>
                 </button>
 
                 <br/><br/>
 
-                <button className="btn btn-outline-dark">
+                <button className="btn btn-outline-dark" onClick={this.goBackToCollection}>
                     <i className="fa fa-arrow-left"/>
                     <span> Return to My Collection</span>
                 </button>
