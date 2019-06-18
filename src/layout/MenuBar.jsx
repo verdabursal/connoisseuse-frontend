@@ -7,14 +7,13 @@ import MyCollection from "../components/MyCollection";
 import Add from "../components/Add";
 import Settings from "../components/Settings";
 import EditBottle from "../components/EditBottle";
-import LogIn from "../components/LogIn";
-import SignUp from "../components/SignUp";
 
 class MenuBar extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            username: props.username
+            username: props.username,
+            setUsername: props.setUsername
         }
     }
 
@@ -33,8 +32,9 @@ class MenuBar extends React.Component {
                         <div className="col-10">
                             <Route
                                 path="/home"
-                                exact
-                                component={Home}/>
+                                render={() =>
+                                    <Home username={this.state.username} setUsername={this.state.setUsername}/>}
+                            />
                             <Route
                                 path="/my-collection"
                                 exact
