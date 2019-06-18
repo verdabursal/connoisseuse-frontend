@@ -13,13 +13,13 @@ class App extends React.Component {
     }
   }
 
-  setUsername = async username => {
-    this.setState({ username })
-  };
+  // setUsername = async username => {
+  //   this.setState({ username })
+  // };
 
   render() {
     return (
-        <MenuBar username={this.state.username} setUsername={this.setUsername}/>
+        <MenuBar username={this.state.username} /*setUsername={this.setUsername}*//>
     );
   }
 }

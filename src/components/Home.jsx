@@ -7,7 +7,6 @@ class Home extends React.Component {
         super(props);
         this.state = {
             username: props.username,
-            //setUsername: props.setUsername,
             formUsername: "",
             formPassword: ""
         }
@@ -15,27 +14,23 @@ class Home extends React.Component {
 
     setFormUsername = async event => {
         await this.setState({ formUsername: event.target.value });
-        console.log("set username: ");
-        console.log(this.state.formUsername);
     };
 
     setFormPassword = async event => {
         await this.setState({ formPassword: event.target.value });
-        console.log("set password: ");
-        console.log(this.state.formPassword);
     };
 
     logIn = async () => {
         let auth =
             await UserService.authUser({
-                user_id: 1,
-                user_username: this.state.formUsername,
-                user_password: this.state.formPassword
+                id: 1,
+                username: this.state.formUsername,
+                password: this.state.formPassword
         });
 
-        if (auth === true) {
+        if (auth != null) {
             await this.setState({ username: this.state.formUsername });
-            // await this.setUsername(this.state.formUsername);
+            await this.props.setUsername(this.state.formUsername);
         } else {
             console.log("could not set username successfully");
         }

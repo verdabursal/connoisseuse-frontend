@@ -17,6 +17,10 @@ class MenuBar extends React.Component {
         }
     }
 
+    setUsername = async username => {
+        this.setState({ username })
+    };
+
     render() {
         return (
             <Router>
@@ -33,24 +37,28 @@ class MenuBar extends React.Component {
                             <Route
                                 path="/home"
                                 render={() =>
-                                    <Home username={this.state.username} /*setUsername={this.state.setUsername}*//>}
+                                    <Home username={this.state.username} setUsername={this.setUsername}/>}
                             />
                             <Route
                                 path="/my-collection"
-                                exact
-                                component={MyCollection}/>
+                                render={() =>
+                                    <MyCollection username={this.state.username}/>}
+                            />
                             <Route
                                 path="/add"
-                                exact
-                                component={Add}/>
+                                render={() =>
+                                    <Add username={this.state.username}/>}
+                            />
                             <Route
                                 path="/settings"
-                                exact
-                                component={Settings}/>
+                                render={() =>
+                                    <Settings username={this.state.username}/>}
+                            />
                             <Route
                                 path="/my-collection/edit/:id"
-                                exact
-                                component={EditBottle}/>
+                                render={() =>
+                                    <EditBottle username={this.state.username}/>}
+                            />
                         </div>
                     </div>
                 </div>
