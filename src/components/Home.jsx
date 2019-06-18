@@ -48,9 +48,9 @@ class Home extends React.Component {
         console.log("this.state.formPassword: " + this.state.formPassword);
 
         let auth = await UserService.createUser({
-            user_id: 1,
-            user_username: this.state.formUsername,
-            user_password: this.state.formPassword
+            id: 1,
+            username: this.state.formUsername,
+            password: this.state.formPassword
         });
 
         if (auth != null) {
