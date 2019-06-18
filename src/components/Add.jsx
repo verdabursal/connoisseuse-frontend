@@ -1,11 +1,7 @@
 import React from 'react';
 
-import mockVarieties from '../mock-data/varieties.mock';
-
 import * as BottleService from '../services/BottleService';
 import * as VarietyService from '../services/VarietyService';
-
-import _ from "lodash";
 
 import redWineGlass from '../images/red_wine_glass.png';
 import whiteWineGlass from '../images/white_wine_glass.jpg';
@@ -37,10 +33,11 @@ class Add extends React.Component {
 
     async componentDidMount() {
         let redVarieties = await VarietyService.fetchVarietiesOfCategory("red");
+        console.log(redVarieties);
         let whiteVarieties = await VarietyService.fetchVarietiesOfCategory("white");
-        let pinkVarieties = _.filter(mockVarieties, ['category', "pink"]);
-        let bubblyVarieties = _.filter(mockVarieties, ['category', "bubbly"]);
-        let sweetVarieties = _.filter(mockVarieties, ['category', "sweet"]);
+        let pinkVarieties = await VarietyService.fetchVarietiesOfCategory("pink");
+        let bubblyVarieties = await VarietyService.fetchVarietiesOfCategory("bubbly");
+        let sweetVarieties = await VarietyService.fetchVarietiesOfCategory("sweet");
         let selectedVarieties = redVarieties;
         this.setState({
             redVarieties, whiteVarieties, pinkVarieties, bubblyVarieties, sweetVarieties, selectedVarieties
@@ -171,8 +168,8 @@ class Add extends React.Component {
                     <select className="form-control" onChange={event => this.setVariety(event.target.value)}>
                         {this.state.selectedVarieties.map(
                             variety =>
-                                <option id={variety.variety} value={variety.variety}>
-                                    {variety.variety}
+                                <option id={variety.varietyName} value={variety.varietyName}>
+                                    {variety.varietyName}
                                 </option>
                         )}
                     </select>
