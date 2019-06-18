@@ -12,8 +12,7 @@ class MenuBar extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            username: props.username //,
-            //setUsername: props.setUsername
+            username: props.username
         }
     }
 
