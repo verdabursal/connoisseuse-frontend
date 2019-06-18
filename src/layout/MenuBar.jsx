@@ -12,8 +12,8 @@ class MenuBar extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            username: props.username,
-            setUsername: props.setUsername
+            username: props.username //,
+            //setUsername: props.setUsername
         }
     }
 
@@ -33,7 +33,7 @@ class MenuBar extends React.Component {
                             <Route
                                 path="/home"
                                 render={() =>
-                                    <Home username={this.state.username} setUsername={this.state.setUsername}/>}
+                                    <Home username={this.state.username} /*setUsername={this.state.setUsername}*//>}
                             />
                             <Route
                                 path="/my-collection"

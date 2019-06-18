@@ -1,10 +1,13 @@
 import React from 'react';
 
+import * as UserService from '../services/UserService';
+
 class Home extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
             username: props.username,
+            //setUsername: props.setUsername,
             formUsername: "",
             formPassword: ""
         }
@@ -23,11 +26,38 @@ class Home extends React.Component {
     };
 
     logIn = async () => {
+        let auth =
+            await UserService.authUser({
+                user_id: 1,
+                user_username: this.state.formUsername,
+                user_password: this.state.formPassword
+        });
 
+        if (auth === true) {
+            await this.setState({ username: this.state.formUsername });
+            // await this.setUsername(this.state.formUsername);
+            console.log("SET USERNAME SUCCESSFULLY!");
+            console.log(this.state.username);
+        } else {
+            console.log("could not set username successfully");
+        }
     };
 
     signUp = async () => {
+        console.log("this.state.formUsername: " + this.state.formUsername);
+        console.log("this.state.formPassword: " + this.state.formPassword);
 
+        let auth = await UserService.createUser({
+            user_id: 1,
+            user_username: this.state.formUsername,
+            user_password: this.state.formPassword
+        });
+
+        if (auth != null) {
+            await this.setState({ username: this.state.formUsername });
+        } else {
+            console.log("could not create new user successfully; returned user was null");
+        }
     };
 
     render() {
