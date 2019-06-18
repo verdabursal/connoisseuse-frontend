@@ -3,10 +3,7 @@ import React from 'react';
 import { faStar } from "@fortawesome/free-regular-svg-icons";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
-import mockData from '../mock-data/collection.mock';
-import mockVarieties from '../mock-data/varieties.mock';
-
-import _ from "lodash";
+import * as BottleService from '../services/BottleService';
 
 class MyCollection extends React.Component {
 
@@ -18,7 +15,11 @@ class MyCollection extends React.Component {
     }
 
     async componentDidMount() {
-        this.setState({ bottles: mockData })
+        let bottles = await BottleService.findBottlesOfUser(this.props.username);
+
+        await this.setState({ bottles });
+
+        console.log(this.state.bottles);
     }
 
     toggleFavorite = async id => {
@@ -42,18 +43,17 @@ class MyCollection extends React.Component {
                         <th>{"Description"}</th>
                     </tr>
                     {
-                        this.state.bottles.map(
+                        this.state.bottles.length >= 1
+                            ? this.state.bottles.map(
                             bottle =>
                                 <tr key={bottle.id}>
                                     <td onClick={this.toggleFavorite(bottle.id)}>
                                         {bottle.favorite
-                                        ? <i className="fa fa-star"/>
-                                        : <FontAwesomeIcon icon={ faStar }/>}</td>
+                                            ? <i className="fa fa-star"/>
+                                            : <FontAwesomeIcon icon={faStar}/>}</td>
                                     <td>{bottle.id}</td>
-                                    <td>{
-                                        _.find(mockVarieties, ['variety', bottle.variety]).category
-                                    }</td>
-                                    <td>{bottle.variety}</td>
+                                    <td>{bottle.variety.category}</td>
+                                    <td>{bottle.variety.varietyName}</td>
                                     <td>{bottle.year}</td>
                                     <td>{bottle.region}</td>
                                     <td>{bottle.label}</td>
@@ -72,7 +72,8 @@ class MyCollection extends React.Component {
                                         </button>
                                     </td>
                                 </tr>
-                        )
+                            )
+                            : ""
                     }
                     </tbody>
                 </table>
