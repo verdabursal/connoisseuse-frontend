@@ -3,6 +3,7 @@ import React from 'react';
 import mockVarieties from '../mock-data/varieties.mock';
 
 import * as BottleService from '../services/BottleService';
+import * as VarietyService from '../services/VarietyService';
 
 import _ from "lodash";
 
@@ -35,8 +36,8 @@ class Add extends React.Component {
     }
 
     async componentDidMount() {
-        let redVarieties = _.filter(mockVarieties, ['category', "red"]);
-        let whiteVarieties = _.filter(mockVarieties, ['category', "white"]);
+        let redVarieties = await VarietyService.fetchVarietiesOfCategory("red");
+        let whiteVarieties = await VarietyService.fetchVarietiesOfCategory("white");
         let pinkVarieties = _.filter(mockVarieties, ['category', "pink"]);
         let bubblyVarieties = _.filter(mockVarieties, ['category', "bubbly"]);
         let sweetVarieties = _.filter(mockVarieties, ['category', "sweet"]);
