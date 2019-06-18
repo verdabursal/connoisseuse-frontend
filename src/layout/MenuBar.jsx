@@ -17,7 +17,8 @@ class MenuBar extends React.Component {
     }
 
     setUsername = async username => {
-        this.setState({ username })
+        this.setState({ username });
+        console.log("username set to " + username);
     };
 
     render() {

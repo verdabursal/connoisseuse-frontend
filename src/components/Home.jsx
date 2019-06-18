@@ -53,6 +53,7 @@ class Home extends React.Component {
 
         if (auth != null) {
             await this.setState({ username: this.state.formUsername });
+            await this.props.setUsername(this.state.formUsername);
         } else {
             console.log("could not create new user successfully; returned user was null");
         }
