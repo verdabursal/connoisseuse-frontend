@@ -20,7 +20,11 @@ class Add extends React.Component {
             bubblyVarieties: [],
             sweetVarieties: [],
             selectedVarieties: [],
-            variety: ""
+            variety: "",
+            year: 0,
+            region: "",
+            label: "",
+            description: ""
         };
     }
 
@@ -49,23 +53,31 @@ class Add extends React.Component {
         } else if (category === "sweet") {
             selectedVarieties = this.state.sweetVarieties;
         }
-        await this.setState({ category, selectedVarieties })
+        await this.setState({category, selectedVarieties})
     };
 
     setVariety = async variety => {
-        this.setState({ variety })
+        this.setState({variety})
+    };
+
+    updateForm = async (field, value) => {
+        let updates = {};
+        updates[field] = value;
+        this.setState(updates);
     };
 
     render() {
-        return(
+        return (
             <div className="container-fluid">
                 <div className="card-deck">
                     <div className={this.state.category === "red"
                         ? "card border-dark bg-light mb-3"
                         : "card border-light bg-light mb-3"}
-                        onClick={() => {this.setCategory("red")}}>
+                         onClick={() => {
+                             this.setCategory("red")
+                         }}>
                         <img src={redWineGlass} className="card-img-top"
-                            alt="red wine glass"/>
+                             alt="red wine glass"/>
                         <div className="card-body">
                             <h5 className="card-title">Red</h5>
                             <p className="card-text">e.g. Merlot, Pinot Noir</p>
@@ -74,7 +86,9 @@ class Add extends React.Component {
                     <div className={this.state.category === "white"
                         ? "card border-dark bg-light mb-3"
                         : "card border-light bg-light mb-3"}
-                        onClick={() => {this.setCategory("white")}}>
+                         onClick={() => {
+                             this.setCategory("white")
+                         }}>
                         <img src={whiteWineGlass} className="card-img-top"
                              alt="white wine glass"/>
                         <div className="card-body">
@@ -85,7 +99,9 @@ class Add extends React.Component {
                     <div className={this.state.category === "pink"
                         ? "card border-dark bg-light mb-3"
                         : "card border-light bg-light mb-3"}
-                         onClick={() => {this.setCategory("pink")}}>
+                         onClick={() => {
+                             this.setCategory("pink")
+                         }}>
                         <img src={pinkWineGlass} className="card-img-top"
                              alt="pink wine glass"/>
                         <div className="card-body">
@@ -96,7 +112,9 @@ class Add extends React.Component {
                     <div className={this.state.category === "bubbly"
                         ? "card border-dark bg-light mb-3"
                         : "card border-light bg-light mb-3"}
-                         onClick={() => {this.setCategory("bubbly")}}>
+                         onClick={() => {
+                             this.setCategory("bubbly")
+                         }}>
                         <img src={bubblyWineGlass} className="card-img-top"
                              alt="bubbly wine glass"/>
                         <div className="card-body">
@@ -107,7 +125,9 @@ class Add extends React.Component {
                     <div className={this.state.category === "sweet"
                         ? "card border-dark bg-light mb-3"
                         : "card border-light bg-light mb-3"}
-                         onClick={() => {this.setCategory("sweet")}}>
+                         onClick={() => {
+                             this.setCategory("sweet")
+                         }}>
                         <img src={sweetWineGlass} className="card-img-top"
                              alt="sweet wine glass"/>
                         <div className="card-body">
@@ -121,30 +141,35 @@ class Add extends React.Component {
                     <label htmlFor="inputType">Type</label>
                     <select className="form-control">
                         {this.state.selectedVarieties.map(
-                        variety =>
-                            <option onClick={() => this.setVariety(variety.variety)}>{variety.variety}</option>
+                            variety =>
+                                <option onClick={() => this.setVariety(variety.variety)}>{variety.variety}</option>
                         )}
                     </select>
                 </div>
 
                 <div className="form-group">
                     <label htmlFor="inputYear">Year</label>
-                    <input type="number" className="form-control" id="inputYear" placeholder="e.g. 2017"/>
+                    <input type="number" className="form-control" id="inputYear" placeholder="e.g. 2017"
+                           onChange={event => this.updateForm("year", event.target.value)}/>
                 </div>
 
                 <div className="form-group">
                     <label htmlFor="inputRegion">Region</label>
-                    <input type="text" className="form-control" id="inputRegion" placeholder="e.g. France"/>
+                    <input type="text" className="form-control" id="inputRegion" placeholder="e.g. France"
+                           onChange={event => this.updateForm("region", event.target.value)}/>
                 </div>
 
                 <div className="form-group">
                     <label htmlFor="inputLabel">Label</label>
-                    <input type="text" className="form-control" id="inputLabel" placeholder="e.g. Chateau de Sansonnet"/>
+                    <input type="text" className="form-control" id="inputLabel"
+                           placeholder="e.g. Chateau de Sansonnet"
+                           onChange={event => this.updateForm("label", event.target.value)}/>
                 </div>
 
                 <div className="form-group">
-                    <label htmlFor="inputDescription">Description</label>
-                    <textarea className="form-control" id="inputDescription" placeholder="e.g. oaky, buttery, smooth"/>
+                    <label htmlFor="inputDescription">Description (optional)</label>
+                    <textarea className="form-control" id="inputDescription" placeholder="e.g. oaky, buttery, smooth"
+                              onChange={event => this.updateForm("description", event.target.value)}/>
                 </div>
 
             </div>
