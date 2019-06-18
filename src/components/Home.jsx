@@ -21,18 +21,26 @@ class Home extends React.Component {
     };
 
     logIn = async () => {
-        let auth =
-            await UserService.authUser({
-                id: 1,
-                username: this.state.formUsername,
-                password: this.state.formPassword
-        });
+        let auth = null;
+
+        try {
+            auth =
+                await UserService.authUser({
+                    id: 1,
+                    username: this.state.formUsername,
+                    password: this.state.formPassword
+                });
+        } catch (err) {
+            auth = null;
+        }
 
         if (auth != null) {
             await this.setState({ username: this.state.formUsername });
             await this.props.setUsername(this.state.formUsername);
         } else {
             console.log("could not set username successfully");
+            console.log("username: " + this.state.formUsername);
+            console.log("password: " + this.state.formPassword);
         }
     };
 

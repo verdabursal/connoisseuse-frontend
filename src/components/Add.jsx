@@ -1,6 +1,9 @@
 import React from 'react';
 
 import mockVarieties from '../mock-data/varieties.mock';
+
+import * as BottleService from '../services/BottleService';
+
 import _ from "lodash";
 
 import redWineGlass from '../images/red_wine_glass.png';
@@ -60,7 +63,8 @@ class Add extends React.Component {
     };
 
     setVariety = async variety => {
-        this.setState({variety})
+        await this.setState({variety});
+        console.log(this.state.variety);
     };
 
     updateForm = async (field, value) => {
@@ -69,8 +73,25 @@ class Add extends React.Component {
         this.setState(updates);
     };
 
-    addBottle = () => {
-        
+    addBottle = async () => {
+        console.log("this.state.variety: " + this.state.variety);
+        console.log("this.props.username: " + this.props.username);
+
+        await BottleService.createBottle({
+            id: 1,
+            variety: null,
+            region: this.state.region,
+            year: this.state.year,
+            label: this.state.label,
+            sweetness: this.state.sweetness,
+            dryness: this.state.dryness,
+            tartness: this.state.tartness,
+            description: this.state.description,
+            favorite: false,
+            user: null
+        },
+            this.state.variety, this.props.username);
+        //this.props.history.push("/my-collection");
     };
 
     render() {
@@ -146,10 +167,12 @@ class Add extends React.Component {
 
                 <div className="form-group">
                     <label htmlFor="inputType">Type</label>
-                    <select className="form-control">
+                    <select className="form-control" onChange={event => this.setVariety(event.target.value)}>
                         {this.state.selectedVarieties.map(
                             variety =>
-                                <option onClick={() => this.setVariety(variety.variety)}>{variety.variety}</option>
+                                <option id={variety.variety} value={variety.variety}>
+                                    {variety.variety}
+                                </option>
                         )}
                     </select>
                 </div>
