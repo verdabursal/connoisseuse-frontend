@@ -69,6 +69,10 @@ class Add extends React.Component {
         this.setState(updates);
     };
 
+    addBottle = () => {
+        
+    };
+
     render() {
         return (
             <div className="container-fluid">
@@ -192,6 +196,12 @@ class Add extends React.Component {
                     <textarea className="form-control" id="inputDescription" placeholder="e.g. oaky, buttery, smooth"
                               onChange={event => this.updateForm("description", event.target.value)}/>
                 </div>
+
+                <h3 className="text-center">
+                    <button className="btn btn-primary mb-3" onClick={this.addBottle}>
+                        Add Bottle to My Collection
+                    </button>
+                </h3>
 
             </div>
         )
