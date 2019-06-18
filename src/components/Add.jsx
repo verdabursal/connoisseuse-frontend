@@ -3,6 +3,12 @@ import React from 'react';
 import mockVarieties from '../mock-data/varieties.mock';
 import _ from "lodash";
 
+import redWineGlass from '../images/red_wine_glass.png';
+import whiteWineGlass from '../images/white_wine_glass.jpg';
+import pinkWineGlass from '../images/pink_wine_glass.png';
+import bubblyWineGlass from '../images/bubbly_wine_glass.jpg';
+import sweetWineGlass from '../images/sweet_wine_glass.png';
+
 class Add extends React.Component {
     constructor(props) {
         super(props);
@@ -58,7 +64,7 @@ class Add extends React.Component {
                         ? "card border-dark bg-light mb-3"
                         : "card border-light bg-light mb-3"}
                         onClick={() => {this.setCategory("red")}}>
-                        <img src="https://picsum.photos/100/50" className="card-img-top"
+                        <img src={redWineGlass} className="card-img-top"
                             alt="red wine glass"/>
                         <div className="card-body">
                             <h5 className="card-title">Red</h5>
@@ -69,7 +75,7 @@ class Add extends React.Component {
                         ? "card border-dark bg-light mb-3"
                         : "card border-light bg-light mb-3"}
                         onClick={() => {this.setCategory("white")}}>
-                        <img src="https://picsum.photos/100/50" className="card-img-top"
+                        <img src={whiteWineGlass} className="card-img-top"
                              alt="white wine glass"/>
                         <div className="card-body">
                             <h5 className="card-title">White</h5>
@@ -80,7 +86,7 @@ class Add extends React.Component {
                         ? "card border-dark bg-light mb-3"
                         : "card border-light bg-light mb-3"}
                          onClick={() => {this.setCategory("pink")}}>
-                        <img src="https://picsum.photos/100/50" className="card-img-top"
+                        <img src={pinkWineGlass} className="card-img-top"
                              alt="pink wine glass"/>
                         <div className="card-body">
                             <h5 className="card-title">Pink</h5>
@@ -91,7 +97,7 @@ class Add extends React.Component {
                         ? "card border-dark bg-light mb-3"
                         : "card border-light bg-light mb-3"}
                          onClick={() => {this.setCategory("bubbly")}}>
-                        <img src="https://picsum.photos/100/50" className="card-img-top"
+                        <img src={bubblyWineGlass} className="card-img-top"
                              alt="bubbly wine glass"/>
                         <div className="card-body">
                             <h5 className="card-title">Bubbly</h5>
@@ -102,7 +108,7 @@ class Add extends React.Component {
                         ? "card border-dark bg-light mb-3"
                         : "card border-light bg-light mb-3"}
                          onClick={() => {this.setCategory("sweet")}}>
-                        <img src="https://picsum.photos/100/50" className="card-img-top"
+                        <img src={sweetWineGlass} className="card-img-top"
                              alt="sweet wine glass"/>
                         <div className="card-body">
                             <h5 className="card-title">Sweet</h5>
@@ -133,7 +139,7 @@ class Add extends React.Component {
 
                 <div className="form-group">
                     <label htmlFor="inputLabel">Label</label>
-                    <input type="text" className="form-control" id="inputLabel" placeholder="e.g. Cotes du Rhone"/>
+                    <input type="text" className="form-control" id="inputLabel" placeholder="e.g. Chateau de Sansonnet"/>
                 </div>
 
                 <div className="form-group">
