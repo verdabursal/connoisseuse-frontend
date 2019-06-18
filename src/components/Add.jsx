@@ -24,6 +24,9 @@ class Add extends React.Component {
             year: 0,
             region: "",
             label: "",
+            sweetness: 50,
+            dryness: 50,
+            tartness: 50,
             description: ""
         };
     }
@@ -164,6 +167,24 @@ class Add extends React.Component {
                     <input type="text" className="form-control" id="inputLabel"
                            placeholder="e.g. Chateau de Sansonnet"
                            onChange={event => this.updateForm("label", event.target.value)}/>
+                </div>
+
+                <div className="form-group">
+                    <label htmlFor="sweetnessRange">Sweetness</label>
+                    <input type="range" className="form-control-range" id="sweetnessRange"
+                           onChange={event => this.updateForm("sweetness", event.target.value)}/>
+                </div>
+
+                <div className="form-group">
+                    <label htmlFor="drynessRange">Dryness</label>
+                    <input type="range" className="form-control-range" id="drynessRange"
+                           onChange={event => this.updateForm("dryness", event.target.value)}/>
+                </div>
+
+                <div className="form-group">
+                    <label htmlFor="tartnessRange">Tartness</label>
+                    <input type="range" className="form-control-range" id="tartnessRange"
+                           onChange={event => this.updateForm("tartness", event.target.value)}/>
                 </div>
 
                 <div className="form-group">
