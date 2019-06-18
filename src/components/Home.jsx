@@ -36,17 +36,12 @@ class Home extends React.Component {
         if (auth === true) {
             await this.setState({ username: this.state.formUsername });
             // await this.setUsername(this.state.formUsername);
-            console.log("SET USERNAME SUCCESSFULLY!");
-            console.log(this.state.username);
         } else {
             console.log("could not set username successfully");
         }
     };
 
     signUp = async () => {
-        console.log("this.state.formUsername: " + this.state.formUsername);
-        console.log("this.state.formPassword: " + this.state.formPassword);
-
         let auth = await UserService.createUser({
             id: 1,
             username: this.state.formUsername,
