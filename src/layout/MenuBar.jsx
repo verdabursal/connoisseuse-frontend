@@ -11,7 +11,6 @@ import EditBottle from "../components/EditBottle";
 class MenuBar extends React.Component {
     constructor(props) {
         super(props);
-        console.log(props);
         this.state = {
             username: props.username
         }
@@ -19,7 +18,6 @@ class MenuBar extends React.Component {
 
     setUsername = async username => {
         this.setState({ username });
-        console.log("username set to " + username);
     };
 
     render() {
@@ -41,6 +39,11 @@ class MenuBar extends React.Component {
                                     <Home username={this.state.username} setUsername={this.setUsername}/>}
                             />
                             <Route
+                                path="/edit/:id"
+                                exact
+                                component={EditBottle}
+                            />
+                            <Route
                                 path="/my-collection"
                                 render={() =>
                                     <MyCollection username={this.state.username}/>}
@@ -54,11 +57,6 @@ class MenuBar extends React.Component {
                                 path="/settings"
                                 render={() =>
                                     <Settings username={this.state.username}/>}
-                            />
-                            <Route
-                                path="/my-collection/edit"
-                                render={() =>
-                                    <EditBottle username={this.state.username}/>}
                             />
                         </div>
                     </div>

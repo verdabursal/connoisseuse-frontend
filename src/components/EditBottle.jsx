@@ -34,8 +34,7 @@ class EditBottle extends React.Component {
     }
 
     async componentDidMount() {
-        this.props.history.push(`/my-collection/edit/${this.state.bottle.id}`);
-        console.log("edit bottle component did mount");
+        this.props.history.push(`/edit/${this.state.bottle.id}`);
         let bottle = await _.find(mockData, ['id', this.state.bottle.id]);
         let variety = await _.find(mockVarieties, ['variety', bottle.variety]);
         let category = variety.category;

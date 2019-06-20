@@ -11,7 +11,6 @@ class MyCollection extends React.Component {
 
     constructor(props) {
         super(props);
-        console.log(props);
         this.state = {
             bottles: []
         }
@@ -27,12 +26,10 @@ class MyCollection extends React.Component {
     };
 
     pushEditBottle = async id => {
-        console.log(this.props);
         this.props.history.push({
-            pathname: `/my-collection/edit/${id}`,
-            state: {id}
+            pathname: `/edit/${id}`,
+            state: {id, username: this.props.username}
         });
-
     };
 
     render() {
