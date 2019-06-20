@@ -1,7 +1,9 @@
 import React from 'react';
 
-import mockData from '../mock-data/collection.mock';
-import mockVarieties from '../mock-data/varieties.mock';
+import * as BottleService from '../services/BottleService';
+import * as VarietyService from '../services/VarietyService';
+import * as CountryService from '../services/CountryService';
+import * as RegionService from '../services/RegionService';
 
 import _ from "lodash";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
@@ -17,7 +19,12 @@ class EditBottle extends React.Component {
                 id: props.location.state.id,
                 variety: '',
                 year: 0,
-                region: '',
+                region: {
+                    name: '',
+                    country: {
+                        name: ''
+                    }
+                },
                 label: '',
                 description: '',
                 favorite: false
@@ -29,24 +36,30 @@ class EditBottle extends React.Component {
                 pink: [],
                 bubbly: [],
                 sweet: []
-            }
+            },
+            countries: [],
+            selectedRegions: []
         }
     }
 
     async componentDidMount() {
         this.props.history.push(`/edit/${this.state.bottle.id}`);
-        let bottle = await _.find(mockData, ['id', this.state.bottle.id]);
-        let variety = await _.find(mockVarieties, ['variety', bottle.variety]);
+        let bottle = await BottleService.findBottleById(this.state.bottle.id);
+        let variety = await VarietyService.fetchVarietyByName(bottle.variety.varietyName);
         let category = variety.category;
 
-        let red = await _.filter(mockVarieties, ['category', "red"]);
-        let white = await _.filter(mockVarieties, ['category', "white"]);
-        let pink = await _.filter(mockVarieties, ['category', "pink"]);
-        let bubbly = await _.filter(mockVarieties, ['category', "bubbly"]);
-        let sweet = await _.filter(mockVarieties, ['category', "sweet"]);
+        let red = await VarietyService.fetchVarietiesOfCategory('red');
+        let white = await VarietyService.fetchVarietiesOfCategory('white');
+        let pink = await VarietyService.fetchVarietiesOfCategory('pink');
+        let bubbly = await VarietyService.fetchVarietiesOfCategory('bubbly');
+        let sweet = await VarietyService.fetchVarietiesOfCategory('sweet');
+
         let varieties = {red, white, pink, bubbly, sweet};
 
-        this.setState({bottle, category, varieties});
+        let countries = await CountryService.fetchAllCountries();
+        let selectedRegions = await RegionService.fetchRegionsInCountry(bottle.region.country.name);
+
+        await this.setState({bottle, category, varieties, countries, selectedRegions});
     }
 
     toggleFavorite = async () => {
@@ -116,11 +129,11 @@ class EditBottle extends React.Component {
 
                 <div className="form-group">
                     <label htmlFor="editVariety">Variety</label>
-                    <select className="form-control" id="editVariety" value={this.state.bottle.variety}
+                    <select className="form-control" id="editVariety" value={this.state.bottle.variety.varietyName}
                             onChange={(event) => this.updateForm('variety', event.target.value)}>
                         {this.state.varieties[this.state.category].map(
                             variety => (
-                                <option value={variety.variety}>{variety.variety}</option>
+                                <option value={variety.varietyName}>{variety.varietyName}</option>
                             )
                         )}
                     </select>
@@ -133,9 +146,27 @@ class EditBottle extends React.Component {
                 </div>
 
                 <div className="form-group">
+                    <label htmlFor="editCountry">Country</label>
+                    <select className="form-control" id="editCountry" value={this.state.bottle.region.country.name}
+                            onChange={(event) => this.updateForm('country', event.target.value)}>
+                        {this.state.countries.map(
+                            country => (
+                                <option value={country.name}>{country.name}</option>
+                            )
+                        )}
+                    </select>
+                </div>
+
+                <div className="form-group">
                     <label htmlFor="editRegion">Region</label>
-                    <input type="text" className="form-control" id="editRegion" value={this.state.bottle.region}
-                           onChange={(event) => this.updateForm('region', event.target.value)}/>
+                    <select className="form-control" id="editRegion" value={this.state.bottle.region.name}
+                            onChange={(event) => this.updateForm('region', event.target.value)}>
+                        {this.state.selectedRegions.map(
+                            region => (
+                                <option value={region.name}>{region.name}</option>
+                            )
+                        )}
+                    </select>
                 </div>
 
                 <div className="form-group">
