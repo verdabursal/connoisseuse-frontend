@@ -38,7 +38,6 @@ class Add extends React.Component {
 
     async componentDidMount() {
         let redVarieties = await VarietyService.fetchVarietiesOfCategory("red");
-        console.log(redVarieties);
         let whiteVarieties = await VarietyService.fetchVarietiesOfCategory("white");
         let pinkVarieties = await VarietyService.fetchVarietiesOfCategory("pink");
         let bubblyVarieties = await VarietyService.fetchVarietiesOfCategory("bubbly");
@@ -46,11 +45,13 @@ class Add extends React.Component {
         let selectedVarieties = redVarieties;
 
         let countries = await CountryService.fetchAllCountries();
-        console.log(countries);
+        let country = countries[0];
+        let selectedRegions = await RegionService.fetchRegionsInCountry(country.name);
+        let region = selectedRegions[0];
 
         this.setState({
             redVarieties, whiteVarieties, pinkVarieties, bubblyVarieties, sweetVarieties, selectedVarieties,
-            countries
+            countries, country, selectedRegions, region
         })
     }
 
@@ -72,12 +73,10 @@ class Add extends React.Component {
 
     setVariety = async variety => {
         await this.setState({variety});
-        console.log(this.state.variety);
     };
 
     setCountry = async country => {
         let selectedRegions = await RegionService.fetchRegionsInCountry(country);
-        console.log(selectedRegions);
         await this.setState({country, selectedRegions});
     };
 
@@ -228,7 +227,7 @@ class Add extends React.Component {
                 <div className="form-group">
                     <label htmlFor="inputLabel">Label</label>
                     <input type="text" className="form-control" id="inputLabel"
-                           placeholder="e.g. Chateau de Sansonnet"
+                           placeholder="e.g. Vigneto di Verdi"
                            onChange={event => this.updateForm("label", event.target.value)}/>
                 </div>
 
