@@ -5,7 +5,7 @@ import * as VarietyService from '../services/VarietyService';
 import * as CountryService from '../services/CountryService';
 import * as RegionService from '../services/RegionService';
 
-import redWineGlass from '../images/red_wine_glass.png';
+import redWineGlass from '../images/red_wine_glass.jpg';
 import whiteWineGlass from '../images/white_wine_glass.jpg';
 import pinkWineGlass from '../images/pink_wine_glass.png';
 import bubblyWineGlass from '../images/bubbly_wine_glass.jpg';
