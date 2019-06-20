@@ -11,6 +11,7 @@ import EditBottle from "../components/EditBottle";
 class MenuBar extends React.Component {
     constructor(props) {
         super(props);
+        console.log(props);
         this.state = {
             username: props.username
         }
@@ -55,7 +56,7 @@ class MenuBar extends React.Component {
                                     <Settings username={this.state.username}/>}
                             />
                             <Route
-                                path="/my-collection/edit/:id"
+                                path="/my-collection/edit"
                                 render={() =>
                                     <EditBottle username={this.state.username}/>}
                             />

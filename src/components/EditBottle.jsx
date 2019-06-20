@@ -7,6 +7,8 @@ import _ from "lodash";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faStar} from "@fortawesome/free-regular-svg-icons";
 
+import {withRouter} from "react-router-dom";
+
 class EditBottle extends React.Component {
     constructor(props) {
         super(props);
@@ -32,6 +34,8 @@ class EditBottle extends React.Component {
     }
 
     async componentDidMount() {
+        this.props.history.push(`/my-collection/edit/${this.state.bottle.id}`);
+        console.log("edit bottle component did mount");
         let bottle = await _.find(mockData, ['id', this.state.bottle.id]);
         let variety = await _.find(mockVarieties, ['variety', bottle.variety]);
         let category = variety.category;
@@ -69,7 +73,7 @@ class EditBottle extends React.Component {
 
     // reload this page with information from database
     cancelChanges = async () => {
-        this.componentDidMount();
+        await this.componentDidMount();
     };
 
     // save changes to database but don't reload page
@@ -177,4 +181,4 @@ class EditBottle extends React.Component {
     }
 }
 
-export default EditBottle;
+export default withRouter(EditBottle);

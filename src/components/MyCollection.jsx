@@ -3,12 +3,15 @@ import React from 'react';
 import { faStar } from "@fortawesome/free-regular-svg-icons";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
+import {withRouter} from "react-router-dom";
+
 import * as BottleService from '../services/BottleService';
 
 class MyCollection extends React.Component {
 
     constructor(props) {
         super(props);
+        console.log(props);
         this.state = {
             bottles: []
         }
@@ -16,14 +19,20 @@ class MyCollection extends React.Component {
 
     async componentDidMount() {
         let bottles = await BottleService.findBottlesOfUser(this.props.username);
-
         await this.setState({ bottles });
-
-        console.log(this.state.bottles);
     }
 
     toggleFavorite = async id => {
         // send request to DB to toggle favorite status of bottle with given id
+    };
+
+    pushEditBottle = async id => {
+        console.log(this.props);
+        this.props.history.push({
+            pathname: `/my-collection/edit/${id}`,
+            state: {id}
+        });
+
     };
 
     render() {
@@ -60,14 +69,7 @@ class MyCollection extends React.Component {
                                     <td>{bottle.description}</td>
                                     <td>
                                         <button className="btn"
-                                                onClick={async () => {
-                                                    this.props.history.push({
-                                                        pathname: `/my-collection/edit/${bottle.id}`,
-                                                        state: {
-                                                            id: bottle.id
-                                                        }
-                                                    })
-                                                }}>
+                                                onClick={() => this.pushEditBottle(bottle.id)}>
                                             <span><i className="fa fa-pencil"/></span>
                                         </button>
                                     </td>
@@ -82,4 +84,4 @@ class MyCollection extends React.Component {
     }
 }
 
-export default MyCollection;
+export default withRouter(MyCollection);
