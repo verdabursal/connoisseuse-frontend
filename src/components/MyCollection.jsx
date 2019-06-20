@@ -55,7 +55,7 @@ class MyCollection extends React.Component {
                                     <td>{bottle.variety.category}</td>
                                     <td>{bottle.variety.varietyName}</td>
                                     <td>{bottle.year}</td>
-                                    <td>{bottle.region}</td>
+                                    <td>{bottle.region.name}</td>
                                     <td>{bottle.label}</td>
                                     <td>{bottle.description}</td>
                                     <td>
