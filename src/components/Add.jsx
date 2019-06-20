@@ -46,9 +46,7 @@ class Add extends React.Component {
         let variety = selectedVarieties[0].varietyName;
 
         let countries = await CountryService.fetchAllCountries();
-        console.log(countries);
         let countryName = countries[0].name;
-        console.log(countryName);
         let selectedRegions = await RegionService.fetchRegionsInCountry(countryName);
         let regionName = selectedRegions[0].name;
 
@@ -80,7 +78,6 @@ class Add extends React.Component {
     };
 
     setCountry = async countryName => {
-        console.log(countryName);
         let selectedRegions = await RegionService.fetchRegionsInCountry(countryName);
         await this.setState({countryName, selectedRegions});
     };
@@ -96,9 +93,6 @@ class Add extends React.Component {
     };
 
     addBottle = async () => {
-        console.log("this.state.variety: " + this.state.variety);
-        console.log("this.props.username: " + this.props.username);
-
         await BottleService.createBottle({
                 id: 1,
                 variety: null,
