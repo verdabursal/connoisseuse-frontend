@@ -43,6 +43,7 @@ class Add extends React.Component {
         let bubblyVarieties = await VarietyService.fetchVarietiesOfCategory("bubbly");
         let sweetVarieties = await VarietyService.fetchVarietiesOfCategory("sweet");
         let selectedVarieties = redVarieties;
+        let variety = selectedVarieties[0];
 
         let countries = await CountryService.fetchAllCountries();
         let country = countries[0];
@@ -51,7 +52,7 @@ class Add extends React.Component {
 
         this.setState({
             redVarieties, whiteVarieties, pinkVarieties, bubblyVarieties, sweetVarieties, selectedVarieties,
-            countries, country, selectedRegions, region
+            variety, countries, country, selectedRegions, region
         })
     }
 
@@ -68,7 +69,8 @@ class Add extends React.Component {
         } else if (category === "sweet") {
             selectedVarieties = this.state.sweetVarieties;
         }
-        await this.setState({category, selectedVarieties})
+        let variety = selectedVarieties[0];
+        await this.setState({category, selectedVarieties, variety})
     };
 
     setVariety = async variety => {
