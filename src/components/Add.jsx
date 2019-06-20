@@ -2,6 +2,8 @@ import React from 'react';
 
 import * as BottleService from '../services/BottleService';
 import * as VarietyService from '../services/VarietyService';
+import * as CountryService from '../services/CountryService';
+import * as RegionService from '../services/RegionService';
 
 import redWineGlass from '../images/red_wine_glass.png';
 import whiteWineGlass from '../images/white_wine_glass.jpg';
@@ -20,8 +22,11 @@ class Add extends React.Component {
             bubblyVarieties: [],
             sweetVarieties: [],
             selectedVarieties: [],
+            countries: [],
+            selectedRegions: [],
             variety: "",
             year: 0,
+            country: "",
             region: "",
             label: "",
             sweetness: 50,
@@ -39,8 +44,13 @@ class Add extends React.Component {
         let bubblyVarieties = await VarietyService.fetchVarietiesOfCategory("bubbly");
         let sweetVarieties = await VarietyService.fetchVarietiesOfCategory("sweet");
         let selectedVarieties = redVarieties;
+
+        let countries = await CountryService.fetchAllCountries();
+        console.log(countries);
+
         this.setState({
-            redVarieties, whiteVarieties, pinkVarieties, bubblyVarieties, sweetVarieties, selectedVarieties
+            redVarieties, whiteVarieties, pinkVarieties, bubblyVarieties, sweetVarieties, selectedVarieties,
+            countries
         })
     }
 
@@ -65,6 +75,16 @@ class Add extends React.Component {
         console.log(this.state.variety);
     };
 
+    setCountry = async country => {
+        let selectedRegions = await RegionService.fetchRegionsInCountry(country);
+        console.log(selectedRegions);
+        await this.setState({country, selectedRegions});
+    };
+
+    setRegion = async region => {
+        await this.setState({region})
+    };
+
     updateForm = async (field, value) => {
         let updates = {};
         updates[field] = value;
@@ -76,18 +96,18 @@ class Add extends React.Component {
         console.log("this.props.username: " + this.props.username);
 
         await BottleService.createBottle({
-            id: 1,
-            variety: null,
-            region: this.state.region,
-            year: this.state.year,
-            label: this.state.label,
-            sweetness: this.state.sweetness,
-            dryness: this.state.dryness,
-            tartness: this.state.tartness,
-            description: this.state.description,
-            favorite: false,
-            user: null
-        },
+                id: 1,
+                variety: null,
+                region: this.state.region,
+                year: this.state.year,
+                label: this.state.label,
+                sweetness: this.state.sweetness,
+                dryness: this.state.dryness,
+                tartness: this.state.tartness,
+                description: this.state.description,
+                favorite: false,
+                user: null
+            },
             this.state.variety, this.props.username);
         //this.props.history.push("/my-collection");
     };
@@ -182,9 +202,27 @@ class Add extends React.Component {
                 </div>
 
                 <div className="form-group">
-                    <label htmlFor="inputRegion">Region</label>
-                    <input type="text" className="form-control" id="inputRegion" placeholder="e.g. France"
-                           onChange={event => this.updateForm("region", event.target.value)}/>
+                    <label htmlFor="selectCountry">Country</label>
+                    <select className="form-control" onChange={event => this.setCountry(event.target.value)}>
+                        {this.state.countries.map(
+                            country =>
+                                <option id={country.name} value={country.name}>
+                                    {country.name}
+                                </option>
+                        )}
+                    </select>
+                </div>
+
+                <div className="form-group">
+                    <label htmlFor="selectRegion">Region</label>
+                    <select className="form-control" onChange={event => this.setRegion(event.target.value)}>
+                        {this.state.selectedRegions.map(
+                            region =>
+                                <option id={region.name} value={region.name}>
+                                    {region.name}
+                                </option>
+                        )}
+                    </select>
                 </div>
 
                 <div className="form-group">
