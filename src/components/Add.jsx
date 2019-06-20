@@ -26,8 +26,8 @@ class Add extends React.Component {
             selectedRegions: [],
             variety: "",
             year: 0,
-            country: "",
-            region: "",
+            countryName: "",
+            regionName: "",
             label: "",
             sweetness: 50,
             dryness: 50,
@@ -43,16 +43,18 @@ class Add extends React.Component {
         let bubblyVarieties = await VarietyService.fetchVarietiesOfCategory("bubbly");
         let sweetVarieties = await VarietyService.fetchVarietiesOfCategory("sweet");
         let selectedVarieties = redVarieties;
-        let variety = selectedVarieties[0];
+        let variety = selectedVarieties[0].varietyName;
 
         let countries = await CountryService.fetchAllCountries();
-        let country = countries[0];
-        let selectedRegions = await RegionService.fetchRegionsInCountry(country.name);
-        let region = selectedRegions[0];
+        console.log(countries);
+        let countryName = countries[0].name;
+        console.log(countryName);
+        let selectedRegions = await RegionService.fetchRegionsInCountry(countryName);
+        let regionName = selectedRegions[0].name;
 
         this.setState({
             redVarieties, whiteVarieties, pinkVarieties, bubblyVarieties, sweetVarieties, selectedVarieties,
-            variety, countries, country, selectedRegions, region
+            variety, countries, countryName, selectedRegions, regionName
         })
     }
 
@@ -69,7 +71,7 @@ class Add extends React.Component {
         } else if (category === "sweet") {
             selectedVarieties = this.state.sweetVarieties;
         }
-        let variety = selectedVarieties[0];
+        let variety = selectedVarieties[0].varietyName;
         await this.setState({category, selectedVarieties, variety})
     };
 
@@ -77,13 +79,14 @@ class Add extends React.Component {
         await this.setState({variety});
     };
 
-    setCountry = async country => {
-        let selectedRegions = await RegionService.fetchRegionsInCountry(country);
-        await this.setState({country, selectedRegions});
+    setCountry = async countryName => {
+        console.log(countryName);
+        let selectedRegions = await RegionService.fetchRegionsInCountry(countryName);
+        await this.setState({countryName, selectedRegions});
     };
 
-    setRegion = async region => {
-        await this.setState({region})
+    setRegion = async regionName => {
+        await this.setState({regionName})
     };
 
     updateForm = async (field, value) => {
@@ -109,7 +112,7 @@ class Add extends React.Component {
                 favorite: false,
                 user: null
             },
-            this.state.variety, this.props.username);
+            this.state.variety, this.props.username, this.state.regionName, this.state.countryName);
         //this.props.history.push("/my-collection");
     };
 
