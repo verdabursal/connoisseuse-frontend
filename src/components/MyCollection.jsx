@@ -21,10 +21,6 @@ class MyCollection extends React.Component {
         await this.setState({ bottles });
     }
 
-    toggleFavorite = async id => {
-        // send request to DB to toggle favorite status of bottle with given id
-    };
-
     pushEditBottle = async id => {
         this.props.history.push({
             pathname: `/edit/${id}`,
@@ -53,7 +49,7 @@ class MyCollection extends React.Component {
                             ? this.state.bottles.map(
                             bottle =>
                                 <tr key={bottle.id}>
-                                    <td onClick={this.toggleFavorite(bottle.id)}>
+                                    <td>
                                         {bottle.favorite
                                             ? <i className="fa fa-star"/>
                                             : <FontAwesomeIcon icon={faStar}/>}</td>

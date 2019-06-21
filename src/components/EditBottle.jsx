@@ -6,8 +6,6 @@ import * as CountryService from '../services/CountryService';
 import * as RegionService from '../services/RegionService';
 
 import _ from "lodash";
-import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-import {faStar} from "@fortawesome/free-regular-svg-icons";
 
 import {withRouter} from "react-router-dom";
 
@@ -148,10 +146,11 @@ class EditBottle extends React.Component {
 
                 <label>Bottle {this.state.bottle.id}</label><br/>
 
-                <label onClick={this.toggleFavorite}>Favorite
-                    {this.state.bottle.favorite
-                    ? <i className="fa fa-star"/>
-                    : <FontAwesomeIcon icon={faStar}/>}</label><br/>
+                <div className="form-group form-check">
+                    <input type="checkbox" className="form-check-input" id="checkFavorite"
+                           checked={this.state.bottle.favorite} onChange={this.toggleFavorite}/>
+                    <label className="form-check-label" htmlFor="checkFavorite">Favorite</label>
+                </div>
 
                 <div className="form-group">
                     <label htmlFor="editCategory">Category</label>
