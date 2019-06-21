@@ -1,3 +1,41 @@
+# README from final project report
+
+Connoisseuse is a web application that is, as of now, locally hosted. 
+
+You will have to download the three components (the MySQL database with all its create schemas, the Java Spring Boot middle tier, and the React frontend application) and run them each individually. 
+
+All of the files necessary to create the database and all its tables, as well as insert all of the initial data, can be found in the Spring Boot application, in the folder:
+
+connoissuse-backend/src/main/resources/sql
+
+I would recommend creating the database and then the tables in the following order:
+
+		1. Users
+		2. Varieties
+		3. Countries
+		4. Regions
+		5. Bottles
+		
+After that, you should run the scripts to insert the varieties, countries, and then regions. 
+
+Once you have the database set up, you can run the Spring Boot application. I have always run it from my IDE (IntelliJ) but you can really do this however you like. The port on which I run it is 8080, and thus my frontend application looks for the backend API at localhost:8080, so if yours is different it’s a quick fix: change “localhost:8080” in the file:
+
+connoisseuse-frontend/src/config.js
+
+**There is another file you must change in order to connect to the database:** 
+
+connoisseuse-backend/src/main/resources/application.properties
+
+There are places where you can specify a username and a password to connect to the database, so go ahead and fill in the necessary values for that.
+
+Once your Spring Boot application is running, you can start the frontend. The way I start my React apps is by cd’ing into the connoisseuse-frontend directory from my command line, then running “npm start” on the command line. 
+
+You can then click on “Home” to get started using the app.
+
+
+
+# Official React documentation below.
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
