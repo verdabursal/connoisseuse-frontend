@@ -19,6 +19,7 @@ class MyCollection extends React.Component {
     async componentDidMount() {
         let bottles = await BottleService.findBottlesOfUser(this.props.username);
         await this.setState({ bottles });
+        console.log(bottles);
     }
 
     pushEditBottle = async id => {
@@ -40,9 +41,9 @@ class MyCollection extends React.Component {
                         <th>{"Category"}</th>
                         <th>{"Variety"}</th>
                         <th>{"Year"}</th>
+                        <th>{"Country"}</th>
                         <th>{"Region"}</th>
                         <th>{"Label"}</th>
-                        <th>{"Description"}</th>
                     </tr>
                     {
                         this.state.bottles.length >= 1
@@ -57,9 +58,9 @@ class MyCollection extends React.Component {
                                     <td>{bottle.variety.category}</td>
                                     <td>{bottle.variety.varietyName}</td>
                                     <td>{bottle.year}</td>
+                                    <td>{bottle.region.country.name}</td>
                                     <td>{bottle.region.name}</td>
                                     <td>{bottle.label}</td>
-                                    <td>{bottle.description}</td>
                                     <td>
                                         <button className="btn"
                                                 onClick={() => this.pushEditBottle(bottle.id)}>
