@@ -115,7 +115,8 @@ class EditBottle extends React.Component {
     };
 
     deleteBottle = async () => {
-        // send request to DB
+        await BottleService.deleteBottle(this.state.bottle.id);
+        this.props.history.push('/my-collection');
     };
 
     // reload this page with information from database
