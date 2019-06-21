@@ -152,8 +152,11 @@ class EditBottle extends React.Component {
                     <label className="form-check-label" htmlFor="checkFavorite">Favorite</label>
                 </div>
 
+                <p>Note: all required fields are marked by an asterisk (*). If values are not provided for those
+                    fields, the bottle cannot be saved.</p>
+
                 <div className="form-group">
-                    <label htmlFor="editCategory">Category</label>
+                    <label htmlFor="editCategory">Category*</label>
                     <select className="form-control" id="editCategory" value={this.state.bottle.variety.category}
                             onChange={(event) => this.updateCategory(event.target.value)}>
                         <option value="red">red</option>
@@ -165,7 +168,7 @@ class EditBottle extends React.Component {
                 </div>
 
                 <div className="form-group">
-                    <label htmlFor="editVariety">Variety</label>
+                    <label htmlFor="editVariety">Variety*</label>
                     <select className="form-control" id="editVariety" value={this.state.bottle.variety.varietyName}
                             onChange={(event) => this.updateVariety(event.target.value)}>
                         {this.state.varieties[this.state.bottle.variety.category].map(
@@ -177,13 +180,13 @@ class EditBottle extends React.Component {
                 </div>
 
                 <div className="form-group">
-                    <label htmlFor="editYear">Year</label>
+                    <label htmlFor="editYear">Year*</label>
                     <input type="number" className="form-control" id="editYear" value={this.state.bottle.year}
                            onChange={(event) => this.updateForm('year', event.target.value)}/>
                 </div>
 
                 <div className="form-group">
-                    <label htmlFor="editCountry">Country</label>
+                    <label htmlFor="editCountry">Country*</label>
                     <select className="form-control" id="editCountry" value={this.state.bottle.region.country.name}
                             onChange={(event) => this.updateCountry(event.target.value)}>
                         {this.state.countries.map(
@@ -195,7 +198,7 @@ class EditBottle extends React.Component {
                 </div>
 
                 <div className="form-group">
-                    <label htmlFor="editRegion">Region</label>
+                    <label htmlFor="editRegion">Region*</label>
                     <select className="form-control" id="editRegion" value={this.state.bottle.region.name}
                             onChange={(event) => this.updateRegion(event.target.value)}>
                         {this.state.selectedRegions.map(
@@ -207,7 +210,7 @@ class EditBottle extends React.Component {
                 </div>
 
                 <div className="form-group">
-                    <label htmlFor="editLabel">Label</label>
+                    <label htmlFor="editLabel">Label*</label>
                     <input type="text" className="form-control" id="editLabel" value={this.state.bottle.label}
                            onChange={(event) => this.updateForm('label', event.target.value)}/>
                 </div>

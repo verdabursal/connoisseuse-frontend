@@ -1,5 +1,7 @@
 import React from 'react';
 
+import {withRouter} from 'react-router-dom';
+
 import * as BottleService from '../services/BottleService';
 import * as VarietyService from '../services/VarietyService';
 import * as CountryService from '../services/CountryService';
@@ -93,21 +95,23 @@ class Add extends React.Component {
     };
 
     addBottle = async () => {
-        await BottleService.createBottle({
-                id: 1,
-                variety: null,
-                region: this.state.region,
-                year: this.state.year,
-                label: this.state.label,
-                sweetness: this.state.sweetness,
-                dryness: this.state.dryness,
-                tartness: this.state.tartness,
-                description: this.state.description,
-                favorite: false,
-                user: null
-            },
-            this.state.variety, this.props.username, this.state.regionName, this.state.countryName);
-        //this.props.history.push("/my-collection");
+        if (this.state.year !== 0 && this.state.year != null && this.state.label !== "") {
+            await BottleService.createBottle({
+                    id: 1,
+                    variety: null,
+                    region: this.state.region,
+                    year: this.state.year,
+                    label: this.state.label,
+                    sweetness: this.state.sweetness,
+                    dryness: this.state.dryness,
+                    tartness: this.state.tartness,
+                    description: this.state.description,
+                    favorite: false,
+                    user: null
+                },
+                this.state.variety, this.props.username, this.state.regionName, this.state.countryName);
+            this.props.history.push("/my-collection");
+        }
     };
 
     render() {
@@ -182,7 +186,7 @@ class Add extends React.Component {
                 </div>
 
                 <div className="form-group">
-                    <label htmlFor="inputType">Type</label>
+                    <label htmlFor="inputType">Type*</label>
                     <select className="form-control" onChange={event => this.setVariety(event.target.value)}>
                         {this.state.selectedVarieties.map(
                             variety =>
@@ -194,13 +198,13 @@ class Add extends React.Component {
                 </div>
 
                 <div className="form-group">
-                    <label htmlFor="inputYear">Year</label>
+                    <label htmlFor="inputYear">Year*</label>
                     <input type="number" className="form-control" id="inputYear" placeholder="e.g. 2017"
                            onChange={event => this.updateForm("year", event.target.value)}/>
                 </div>
 
                 <div className="form-group">
-                    <label htmlFor="selectCountry">Country</label>
+                    <label htmlFor="selectCountry">Country*</label>
                     <select className="form-control" onChange={event => this.setCountry(event.target.value)}>
                         {this.state.countries.map(
                             country =>
@@ -212,7 +216,7 @@ class Add extends React.Component {
                 </div>
 
                 <div className="form-group">
-                    <label htmlFor="selectRegion">Region</label>
+                    <label htmlFor="selectRegion">Region*</label>
                     <select className="form-control" onChange={event => this.setRegion(event.target.value)}>
                         {this.state.selectedRegions.map(
                             region =>
@@ -224,35 +228,38 @@ class Add extends React.Component {
                 </div>
 
                 <div className="form-group">
-                    <label htmlFor="inputLabel">Label</label>
+                    <label htmlFor="inputLabel">Label*</label>
                     <input type="text" className="form-control" id="inputLabel"
                            placeholder="e.g. Vigneto di Verdi"
                            onChange={event => this.updateForm("label", event.target.value)}/>
                 </div>
 
                 <div className="form-group">
-                    <label htmlFor="sweetnessRange">Sweetness</label>
+                    <label htmlFor="sweetnessRange">Sweetness*</label>
                     <input type="range" className="form-control-range" id="sweetnessRange"
                            onChange={event => this.updateForm("sweetness", event.target.value)}/>
                 </div>
 
                 <div className="form-group">
-                    <label htmlFor="drynessRange">Dryness</label>
+                    <label htmlFor="drynessRange">Dryness*</label>
                     <input type="range" className="form-control-range" id="drynessRange"
                            onChange={event => this.updateForm("dryness", event.target.value)}/>
                 </div>
 
                 <div className="form-group">
-                    <label htmlFor="tartnessRange">Tartness</label>
+                    <label htmlFor="tartnessRange">Tartness*</label>
                     <input type="range" className="form-control-range" id="tartnessRange"
                            onChange={event => this.updateForm("tartness", event.target.value)}/>
                 </div>
 
                 <div className="form-group">
-                    <label htmlFor="inputDescription">Description (optional)</label>
+                    <label htmlFor="inputDescription">Description</label>
                     <textarea className="form-control" id="inputDescription" placeholder="e.g. oaky, buttery, smooth"
                               onChange={event => this.updateForm("description", event.target.value)}/>
                 </div>
+
+                <p>Note: all required fields are marked by an asterisk (*). If values are not provided for those
+                    fields, the bottle cannot be saved.</p>
 
                 <h3 className="text-center">
                     <button className="btn btn-primary mb-3" onClick={this.addBottle}>
@@ -265,4 +272,4 @@ class Add extends React.Component {
     }
 }
 
-export default Add;
+export default withRouter(Add);
