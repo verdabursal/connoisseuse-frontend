@@ -27,6 +27,9 @@ class EditBottle extends React.Component {
                     }
                 },
                 label: '',
+                sweetness: 50,
+                dryness: 50,
+                tartness: 50,
                 description: '',
                 favorite: false
             },
@@ -124,9 +127,11 @@ class EditBottle extends React.Component {
 
     // save changes to database but don't reload page
     saveChanges = async () => {
-        await BottleService.updateBottle(this.state.bottle.variety.varietyName,
-            this.state.bottle.region.name, this.state.bottle.region.country.name,
-            this.state.bottle);
+        if (this.state.bottle.year !== 0 && this.state.bottle.year != null && this.state.bottle.label !== "") {
+            await BottleService.updateBottle(this.state.bottle.variety.varietyName,
+                this.state.bottle.region.name, this.state.bottle.region.country.name,
+                this.state.bottle);
+        }
     };
 
     // return to My Collection without saving any unsaved changes
@@ -213,6 +218,27 @@ class EditBottle extends React.Component {
                     <label htmlFor="editLabel">Label*</label>
                     <input type="text" className="form-control" id="editLabel" value={this.state.bottle.label}
                            onChange={(event) => this.updateForm('label', event.target.value)}/>
+                </div>
+
+                <div className="form-group">
+                    <label htmlFor="sweetnessRange">Sweetness*</label>
+                    <input type="range" className="form-control-range" id="sweetnessRange"
+                           value={this.state.bottle.sweetness}
+                           onChange={event => this.updateForm("sweetness", event.target.value)}/>
+                </div>
+
+                <div className="form-group">
+                    <label htmlFor="drynessRange">Dryness*</label>
+                    <input type="range" className="form-control-range" id="drynessRange"
+                           value={this.state.bottle.dryness}
+                           onChange={event => this.updateForm("dryness", event.target.value)}/>
+                </div>
+
+                <div className="form-group">
+                    <label htmlFor="tartnessRange">Tartness*</label>
+                    <input type="range" className="form-control-range" id="tartnessRange"
+                           value={this.state.bottle.tartness}
+                           onChange={event => this.updateForm("tartness", event.target.value)}/>
                 </div>
 
                 <div className="form-group">
