@@ -68,15 +68,31 @@ class EditBottle extends React.Component {
 
     handleCategoryChange = async event => {
         let category = event.target.value;
-        this.setState({ category });
-        this.updateForm('variety', this.state.varieties[category]);
+        await this.setState({ category });
+        await this.updateForm('variety', this.state.varieties[category]);
     };
 
     updateForm = async (field, value) => {
         let updates = {};
         updates[field] = value;
         let bottle = _.assign({}, this.state.bottle, updates);
-        this.setState({ bottle });
+        await this.setState({ bottle });
+    };
+
+    updateCountry = async countryName => {
+        let selectedRegions = await RegionService.fetchRegionsInCountry(countryName);
+        let name = selectedRegions[0].name;
+        let region = {
+            name,
+            country: {
+                name: countryName
+            }
+        };
+        let updates = {};
+        updates["region"] = region;
+        let bottle = _.assign({}, this.state.bottle, updates);
+
+        await this.setState({bottle, selectedRegions});
     };
 
     deleteBottle = async () => {
@@ -148,7 +164,7 @@ class EditBottle extends React.Component {
                 <div className="form-group">
                     <label htmlFor="editCountry">Country</label>
                     <select className="form-control" id="editCountry" value={this.state.bottle.region.country.name}
-                            onChange={(event) => this.updateForm('country', event.target.value)}>
+                            onChange={(event) => this.updateCountry(event.target.value)}>
                         {this.state.countries.map(
                             country => (
                                 <option value={country.name}>{country.name}</option>
