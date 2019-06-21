@@ -17,7 +17,10 @@ class EditBottle extends React.Component {
         this.state = {
             bottle: {
                 id: props.location.state.id,
-                variety: '',
+                variety: {
+                    varietyName: '',
+                    category: 'red'
+                },
                 year: 0,
                 region: {
                     name: '',
@@ -29,7 +32,6 @@ class EditBottle extends React.Component {
                 description: '',
                 favorite: false
             },
-            category: 'red',
             varieties: {
                 red: [],
                 white: [],
@@ -45,8 +47,6 @@ class EditBottle extends React.Component {
     async componentDidMount() {
         this.props.history.push(`/edit/${this.state.bottle.id}`);
         let bottle = await BottleService.findBottleById(this.state.bottle.id);
-        let variety = await VarietyService.fetchVarietyByName(bottle.variety.varietyName);
-        let category = variety.category;
 
         let red = await VarietyService.fetchVarietiesOfCategory('red');
         let white = await VarietyService.fetchVarietiesOfCategory('white');
@@ -59,17 +59,11 @@ class EditBottle extends React.Component {
         let countries = await CountryService.fetchAllCountries();
         let selectedRegions = await RegionService.fetchRegionsInCountry(bottle.region.country.name);
 
-        await this.setState({bottle, category, varieties, countries, selectedRegions});
+        await this.setState({bottle, varieties, countries, selectedRegions});
     }
 
     toggleFavorite = async () => {
-        this.updateForm('favorite', !this.state.bottle.favorite);
-    };
-
-    handleCategoryChange = async event => {
-        let category = event.target.value;
-        await this.setState({ category });
-        await this.updateForm('variety', this.state.varieties[category]);
+        await this.updateForm('favorite', !this.state.bottle.favorite);
     };
 
     updateForm = async (field, value) => {
@@ -77,6 +71,22 @@ class EditBottle extends React.Component {
         updates[field] = value;
         let bottle = _.assign({}, this.state.bottle, updates);
         await this.setState({ bottle });
+    };
+
+    updateCategory = async category => {
+        let varietyName = this.state.varieties[category][0].varietyName;
+        let variety = {varietyName, category};
+        let updates = {variety};
+        let bottle = _.assign({}, this.state.bottle, updates);
+        await this.setState({bottle});
+    };
+
+    updateVariety = async varietyName => {
+        let updates = {varietyName};
+        let variety = _.assign({}, this.state.bottle.variety, updates);
+        let updates2 = {variety};
+        let bottle = _.assign({}, this.state.bottle, updates2);
+        await this.setState({bottle});
     };
 
     updateCountry = async countryName => {
@@ -88,11 +98,20 @@ class EditBottle extends React.Component {
                 name: countryName
             }
         };
-        let updates = {};
-        updates["region"] = region;
+        let updates = {region};
         let bottle = _.assign({}, this.state.bottle, updates);
 
         await this.setState({bottle, selectedRegions});
+    };
+
+    updateRegion = async regionName => {
+        let updates = {
+            name: regionName
+        };
+        let region = _.assign({}, this.state.bottle.region, updates);
+        let updates2 = {region};
+        let bottle = _.assign({}, this.state.bottle, updates2);
+        await this.setState({bottle});
     };
 
     deleteBottle = async () => {
@@ -106,7 +125,9 @@ class EditBottle extends React.Component {
 
     // save changes to database but don't reload page
     saveChanges = async () => {
-        // send request to DB
+        await BottleService.updateBottle(this.state.bottle.variety.varietyName,
+            this.state.bottle.region.name, this.state.bottle.region.country.name,
+            this.state.bottle);
     };
 
     // return to My Collection without saving any unsaved changes
@@ -133,8 +154,8 @@ class EditBottle extends React.Component {
 
                 <div className="form-group">
                     <label htmlFor="editCategory">Category</label>
-                    <select className="form-control" id="editCategory" value={this.state.category}
-                            onChange={(event) => this.handleCategoryChange(event)}>
+                    <select className="form-control" id="editCategory" value={this.state.bottle.variety.category}
+                            onChange={(event) => this.updateCategory(event.target.value)}>
                         <option value="red">red</option>
                         <option value="white">white</option>
                         <option value="pink">pink</option>
@@ -146,8 +167,8 @@ class EditBottle extends React.Component {
                 <div className="form-group">
                     <label htmlFor="editVariety">Variety</label>
                     <select className="form-control" id="editVariety" value={this.state.bottle.variety.varietyName}
-                            onChange={(event) => this.updateForm('variety', event.target.value)}>
-                        {this.state.varieties[this.state.category].map(
+                            onChange={(event) => this.updateVariety(event.target.value)}>
+                        {this.state.varieties[this.state.bottle.variety.category].map(
                             variety => (
                                 <option value={variety.varietyName}>{variety.varietyName}</option>
                             )
@@ -176,7 +197,7 @@ class EditBottle extends React.Component {
                 <div className="form-group">
                     <label htmlFor="editRegion">Region</label>
                     <select className="form-control" id="editRegion" value={this.state.bottle.region.name}
-                            onChange={(event) => this.updateForm('region', event.target.value)}>
+                            onChange={(event) => this.updateRegion(event.target.value)}>
                         {this.state.selectedRegions.map(
                             region => (
                                 <option value={region.name}>{region.name}</option>
