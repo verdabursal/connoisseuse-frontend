@@ -7,10 +7,18 @@ import MenuBar from './layout/MenuBar';
 
 class App extends React.Component {
 
+  // render() {
+  //   return (
+  //       <MenuBar/>
+  //   );
+  // }
+
   render() {
     return (
-        <MenuBar/>
-    );
+        <div>
+          <h1>Testing testing 123</h1>
+        </div>
+    )
   }
 }
 
